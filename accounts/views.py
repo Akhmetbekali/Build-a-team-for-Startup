@@ -22,7 +22,7 @@ def registration(request):
     else:
         form = RegistrationForm()
         args = {'form': form}
-        return render(request, 'accounts/register.html', args)
+        return render(request, 'accounts/registration.html', args)
 
 
 def profile(request):

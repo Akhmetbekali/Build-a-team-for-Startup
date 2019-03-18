@@ -6,7 +6,6 @@
     <link rel="stylesheet" href="https://unpkg.com/purecss@1.0.0/build/pure-min.css" integrity="sha384-nn4HPE8lTHyVtfCBi5yW9d20FjT8BJwUXyWZT9InLYax14RDjBj46LmSztkmNP9w" crossorigin="anonymous">
     <link rel="stylesheet" href="/static/css/layouts/own-hotfixes.css">
 </head>
-
 <div class="header">
     <div class="home-menu pure-menu pure-menu-horizontal pure-menu-fixed">
         <a class="pure-menu-heading" href="..">Go Back</a>
@@ -19,22 +18,30 @@
 
 <div class="formContainer">
     <div class="middleAlignContainer">
-<div align="right">
-    <form class="pure-form">
+    <form class="pure-form pure-form-aligned">
         <fieldset>
-            <input type="text" placeholder="Email">
-            <input type="password" placeholder="Password">
+            <div class="pure-control-group">
+                <label for="name">Username</label>
+                <input id="name" type="text" placeholder="Username">
+                <span class="pure-form-message-inline">This is a required field.</span>
+            </div>
 
-            <label for="remember">
-                <input id="remember" type="checkbox"> Remember me
-            </label>
+            <div class="pure-control-group">
+                <label for="password">Password</label>
+                <input id="password" type="password" placeholder="Password">
+            </div>
 
-            <form action="/accounts/templates/accounts/profile.html">
+            <div class="pure-controls">
+                <label for="remember">
+                    <input id="remember" type="checkbox"> Remember me
+                </label>
+            </div>
+
+            <div class="pure-controls">
                 <button type="submit" class="pure-button pure-button-primary">Sign in</button>
-            </form>
+            </div>
         </fieldset>
     </form>
-</div>
     </div>  
 </div>
 </body>
