@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect
 from accounts.forms import RegistrationForm
+from django.contrib.auth.models import User
 
 # Create your views here.
 
@@ -9,7 +10,7 @@ def home(request):
 
 
 def login_redirect(request):
-    return redirect('account/home.html')
+    return redirect('account/')
 
 
 def registration(request):
@@ -22,3 +23,8 @@ def registration(request):
         form = RegistrationForm()
         args = {'form': form}
         return render(request, 'accounts/register.html', args)
+
+
+def profile(request):
+    args = {'user': request.user}
+    return render(request, 'accounts/profile.html', args)

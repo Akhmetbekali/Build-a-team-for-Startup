@@ -20,7 +20,7 @@ from accounts import views
 
 
 urlpatterns = [
-    url(r'^$', views.home),
+    url(r'^$', views.login_redirect),
     path('admin/', admin.site.urls),
     url('account/', include("accounts.urls"))
 ]
