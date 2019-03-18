@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="A layout example with a side menu that hides on mobile, just like the Pure website.">
+    <title>Profile</title>
+
+    <link rel="stylesheet" href="https://unpkg.com/purecss@1.0.0/build/pure-min.css" integrity="sha384-nn4HPE8lTHyVtfCBi5yW9d20FjT8BJwUXyWZT9InLYax14RDjBj46LmSztkmNP9w" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://unpkg.com/purecss@1.0.0/build/base-min.css">
+    <link rel="stylesheet" href="https://unpkg.com/purecss@1.0.0/build/grids-min.css">
+    <link rel="stylesheet" href="https://unpkg.com/purecss@1.0.0/build/grids-responsive-min.css">
+    <link rel="stylesheet" href="/static/css/layouts/side-menu.css">
+</head>
+<body>
+
+<div id="layout">
+    <!-- Menu toggle -->
+    <a href="#menu" id="menuLink" class="menu-link">
+        <!-- Hamburger icon -->
+        <span></span>
+    </a>
+
+    <div id="menu">
+        <div class="pure-menu">
+            <a class="pure-menu-heading" href="..">Home</a>
+
+            <ul class="pure-menu-list">
+                <li class="pure-menu-item"><a href="#" class="pure-menu-link">My profile</a></li>
+                <li class="pure-menu-item"><a href="#" class="pure-menu-link">Edit</a></li>
+                <li class="pure-menu-item"><a href="#" class="pure-menu-link">Log out</a></li>
+            </ul>
+        </div>
+    </div>
+
+    <div id="main">
+        <div class="content">
+            <div class="pure-g">
+                <div class="pure-u-1 pure-u-md-1-2 pure-u-lg-1-2">
+                    <div class="l-box">
+                        <img class="pure-img-responsive" src="http://pixel-salad.com/website/cards/img/portrait-woman2.jpg" alt="My Photo">
+                    </div>
+                </div>
+                <div class="pure-u-1 pure-u-md-1-2 pure-u-lg-1-2">
+                    <div class="l-box">
+                        <h2>Name Surname</h2>
+                        <h3>Junior Java Programmer</h3>
+                    </div>
+                </div>
+            </div>
+
+            <h2 class="content-subhead">Description</h2>
+            <p>
+                Worked in SberKek and now wanna something new =)
+            </p>
+        </div>
+    </div>
+</div>
+
+
+
+
+<script src="/static/js/ui.js"></script>
+
+</body>
+</html>

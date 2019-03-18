@@ -1,12 +1,39 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
-    <title> LOGIN</title>
+    <meta charset="UTF-8">
+    <title>Sign In</title>
+    <link rel="stylesheet" href="https://unpkg.com/purecss@1.0.0/build/pure-min.css" integrity="sha384-nn4HPE8lTHyVtfCBi5yW9d20FjT8BJwUXyWZT9InLYax14RDjBj46LmSztkmNP9w" crossorigin="anonymous">
+    <link rel="stylesheet" href="/static/css/layouts/own-hotfixes.css">
 </head>
-    <body> Login
-        <form method = "POST">
-            {%  csrf_token %}
-            {{ form.as_p }}
-            <button type = "submit">Log in</button>
-        </form>
-    </body>
+
+<div class="header">
+    <div class="home-menu pure-menu pure-menu-horizontal pure-menu-fixed">
+        <a class="pure-menu-heading" href="..">Go Back</a>
+
+
+    </div>
+</div>
+
+<body>
+
+<div class="formContainer">
+    <div class="middleAlignContainer">
+<div align="right">
+    <form class="pure-form">
+        <fieldset>
+            <input type="email" placeholder="Email">
+            <input type="password" placeholder="Password">
+
+            <label for="remember">
+                <input id="remember" type="checkbox"> Remember me
+            </label>
+
+            <button type="submit" class="pure-button pure-button-primary">Sign in</button>
+        </fieldset>
+    </form>
+</div>
+    </div>  
+</div>
+</body>
 </html>
