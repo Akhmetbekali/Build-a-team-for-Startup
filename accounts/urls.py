@@ -9,4 +9,5 @@ urlpatterns = [
     url(r'^registration/$', views.registration),
     url(r'^profile/$', views.profile),
     url(r'^profile/edit$', views.edit_profile),
+    url(r'^catalog/$', views.catalog),
 ]
