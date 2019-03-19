@@ -49,6 +49,8 @@ See also the list of [contributors](https://github.com/stalem9/Build-a-team-for-
 
 ## Acknowledgments
 
-* Hat tip to anyone whose code was used
-* Inspiration
-* etc
+# Our project is not that perfect right now, as a result we have some minor bugs:
+
+* If you enter the main page after successfull login you need to enter the system again
+* For now, you can not edit description, speciality and photo
+* To see the front-end of catalog page you need to run http://localhost:8000/account/catalog  Back end is not ready yet, but for the next sprint it will be fixed
