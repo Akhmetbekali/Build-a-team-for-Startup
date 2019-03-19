@@ -55,4 +55,4 @@ See also the list of [contributors](https://github.com/stalem9/Build-a-team-for-
 * For now, you can not edit description, speciality and photo
 * Moreover, in edit profile page there is password warning, because we do not have an ability to change password
 * To see the front-end of catalog page you need to run http://localhost:8000/account/catalog  
-####All the bugs will be fixed for the next sprint
+#### All the bugs will be fixed for the next sprint
