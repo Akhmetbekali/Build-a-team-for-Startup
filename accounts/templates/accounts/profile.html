@@ -26,9 +26,9 @@
             <a class="pure-menu-heading" href="..">Home</a>
 
             <ul class="pure-menu-list">
-                <li class="pure-menu-item"><a href="#" class="pure-menu-link">My profile</a></li>
-                <li class="pure-menu-item"><a href="#" class="pure-menu-link">Edit</a></li>
-                <li class="pure-menu-item"><a href="#" class="pure-menu-link">Log out</a></li>
+                <li class="pure-menu-item pure-menu-selected"><a href="#" class="pure-menu-link">My profile</a></li>
+                <li class="pure-menu-item"><a href="edit" class="pure-menu-link">Edit</a></li>
+                <li class="pure-menu-item"><a href="/account/logout" class="pure-menu-link">Log out</a></li>
             </ul>
         </div>
     </div>
@@ -43,7 +43,10 @@
                 </div>
                 <div class="pure-u-1 pure-u-md-1-2 pure-u-lg-1-2">
                     <div class="l-box">
-                        <h2>Name Surname</h2>
+                        <h2>{{ user }}</h2>
+                        <h3>{{ user.first_name }}</h3>
+                        <h3> {{ user.last_name }}</h3>
+                        <h3> {{ user.email }}</h3>
                         <h3>Junior Java Programmer</h3>
                     </div>
                 </div>
@@ -60,7 +63,7 @@
 
 
 
-<script src="/static/js/ui.js"></script>
+<script src="js/ui.js"></script>
 
 </body>
 </html>
