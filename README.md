@@ -53,4 +53,5 @@ See also the list of [contributors](https://github.com/stalem9/Build-a-team-for-
 
 * If you enter the main page after successfull login you need to enter the system again
 * For now, you can not edit description, speciality and photo
-* To see the front-end of catalog page you need to run http://localhost:8000/account/catalog  Back end is not ready yet, but for the next sprint it will be fixed
+* To see the front-end of catalog page you need to run http://localhost:8000/account/catalog  
+Back end is not ready yet, but for the next sprint it will be fixed
