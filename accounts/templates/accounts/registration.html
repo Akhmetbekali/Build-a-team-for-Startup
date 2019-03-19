@@ -19,7 +19,7 @@
 <div class="formContainer">
     <div class="middleAlignContainer">
 
-<form class="pure-form pure-form-aligned" method="post" novalidate>
+<form class="pure-form pure-form-aligned" method="post">
     {% csrf_token %}
     <fieldset>
         {% for field in form.visible_fields %}

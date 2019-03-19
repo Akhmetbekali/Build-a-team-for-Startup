@@ -19,7 +19,10 @@ def registration(request):
         form = RegistrationForm(request.POST)
         if form.is_valid():
             form.save()
-            return redirect('/account')
+            return redirect('../login')
+        else:
+            args = {'form': form}
+            return render(request, 'accounts/registration.html', args)
     else:
         form = RegistrationForm()
         args = {'form': form}
