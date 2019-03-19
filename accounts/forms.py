@@ -26,6 +26,7 @@ class RegistrationForm(UserCreationForm):
         if commit:
             user.save()
 
+
 class EditProfileForm(UserChangeForm):
     class Meta:
         model = User
@@ -33,5 +34,4 @@ class EditProfileForm(UserChangeForm):
             'first_name',
             'last_name',
             'email',
-            'password'
         )

@@ -3,10 +3,12 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="A layout example with a side menu that hides on mobile, just like the Pure website.">
+    <meta name="description"
+          content="A layout example with a side menu that hides on mobile, just like the Pure website.">
     <title>Profile</title>
 
-    <link rel="stylesheet" href="https://unpkg.com/purecss@1.0.0/build/pure-min.css" integrity="sha384-nn4HPE8lTHyVtfCBi5yW9d20FjT8BJwUXyWZT9InLYax14RDjBj46LmSztkmNP9w" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://unpkg.com/purecss@1.0.0/build/pure-min.css"
+          integrity="sha384-nn4HPE8lTHyVtfCBi5yW9d20FjT8BJwUXyWZT9InLYax14RDjBj46LmSztkmNP9w" crossorigin="anonymous">
     <link rel="stylesheet" href="https://unpkg.com/purecss@1.0.0/build/base-min.css">
     <link rel="stylesheet" href="https://unpkg.com/purecss@1.0.0/build/grids-min.css">
     <link rel="stylesheet" href="https://unpkg.com/purecss@1.0.0/build/grids-responsive-min.css">
@@ -35,32 +37,22 @@
 
     <div id="main">
         <div class="content">
-        <form class="pure-form pure-form-stacked">
-            <fieldset>
-            <legend>Edit profile</legend>
-            <label for="page-photo">Page photo</label>
-            <input id="page-photo" type="file" accept="image/jpeg, image/png">
-            
-            <label for="first-name">First Name</label>
-            <input id="first-name" type="text" value="Name">
+            <form class="pure-form pure-form-stacked" method="post">
+                {% csrf_token %}
+                <fieldset>
+                    {% for field in form.visible_fields %}
+                        <label>{{ field.label_tag }}</label>
+                        {{ field }}
+                        <span class="pure-form-message-inline">{{ field.errors }}</span>
+                        <span class="pure-form-message-inline">{{ field.help_text }}</span>
+                    {% endfor %}
 
-            <label for="last-name">Last Name</label>
-            <input id="last-name" type="text" value="Surname">
-
-            <label for="password">Password</label>
-            <input id="password" type="password" value="Password">
-
-            <label for="description">Description</label>
-            <textarea id="description" placeholder="Tell something about yourself"></textarea>
-
-            <button type="submit" class="pure-button pure-button-primary">Submit</button>
-            </fieldset>
-        </form>
+                    <button type="submit" class="pure-button pure-button-primary">Submit</button>
+                </fieldset>
+            </form>
         </div>
     </div>
 </div>
-
-
 
 
 <script src="js/ui.js"></script>
