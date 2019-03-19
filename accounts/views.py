@@ -9,6 +9,8 @@ from accounts.forms import RegistrationForm, EditProfileForm
 def home(request):
     return render(request, 'accounts/home.html')
 
+def catalog(request):
+    return render(request, 'accounts/users_catalog.html')
 
 def login_redirect(request):
     return redirect('account/')
