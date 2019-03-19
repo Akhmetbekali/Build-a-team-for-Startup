@@ -49,7 +49,7 @@ Html, body{
 .user-view {
     width: 340px;
     height: 220px;
-    margin: 40px auto;
+    margin: 30px auto;
     background: #FFFFFF;
     box-shadow: 1px 2px 3px 0px rgba(0,0,0,0.10);
     border-radius: 6px;
@@ -59,18 +59,18 @@ Html, body{
 }
 
 .user-name {
-    padding: 10px 30px;
+    padding: 5px 7px;
     color: #5E6977;
     font-size: 18px;
     font-weight: 400;
 }
 
 .photo{
-    margin-left: 90px;
+    margin-left: 50px;
 }
 
 .description {
-    padding-top: 20px;
+    padding-top: 30px;
     text-align: right;
     width: 120px;
 }
