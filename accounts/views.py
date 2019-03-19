@@ -31,6 +31,11 @@ def registration(request):
 
 def profile(request):
     args = {'user': request.user}
+    return render(request, 'accounts/profile.html', args)
+
+
+def profile2(request):
+    args = {'user': request.user}
     return render(request, 'accounts/profile2.html', args)
 
 
