@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from accounts.forms import RegistrationForm
 from django.contrib.auth.models import User
+from django.contrib.auth.forms import UserChangeForm
 
 # Create your views here.
 
@@ -27,4 +28,9 @@ def registration(request):
 
 def profile(request):
     args = {'user': request.user}
-    return render(request, 'accounts/profile.html', args)
+    return render(request, 'accounts/profile2.html', args)
+
+
+def edit_profile(request):
+    if request.method == 'POST':
+        form = UserChangeForm
