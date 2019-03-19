@@ -39,7 +39,7 @@ def edit_profile(request):
         form = EditProfileForm(request.POST, instance=request.user)
         if form.is_valid():
             form.save()
-            return redirect('/accounts/profile')
+            return redirect('/account/profile')
         else:
             args = {'form': form}
             return render(request, 'accounts/profile_edit.html', args)
@@ -47,3 +47,8 @@ def edit_profile(request):
         form = EditProfileForm(instance=request.user)
         args = {'form': form}
         return render(request, 'accounts/profile_edit.html', args)
+
+
+def catalog(request):
+    args = {'user': request.user}
+    return render(request, 'accounts/users_catalog.html', args)
