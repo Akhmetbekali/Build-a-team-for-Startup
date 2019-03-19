@@ -49,7 +49,7 @@ See also the list of [contributors](https://github.com/stalem9/Build-a-team-for-
 
 ## Acknowledgments
 
-# Our project is not that perfect right now, as a result we have some minor bugs:
+### Our project is not that perfect right now, as a result we have some minor bugs:
 
 * If you enter the main page after successfull login you need to enter the system again
 * For now, you can not edit description, speciality and photo
