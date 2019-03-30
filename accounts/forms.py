@@ -2,6 +2,7 @@ from django import forms
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm, UserChangeForm, ReadOnlyPasswordHashField
 from accounts import views
+from accounts.models import UserProfile
 
 
 class RegistrationForm(UserCreationForm):
@@ -28,7 +29,8 @@ class RegistrationForm(UserCreationForm):
             user.save()
 
 
-class EditProfileForm(UserChangeForm):
+class EditProfileForm(forms.ModelForm):
+    email = forms.EmailField(required=True)
     password = None
 
     class Meta:
@@ -36,5 +38,16 @@ class EditProfileForm(UserChangeForm):
         fields = (
             'first_name',
             'last_name',
-            'email',
+            'email'
         )
+
+class ProfileUpdateForm(forms.ModelForm):
+    class Meta:
+        model = UserProfile
+        fields = (
+            'image',
+            'speciality',
+            'description'
+        )
+
+
