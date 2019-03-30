@@ -39,17 +39,19 @@
                       <div class="media">
                         <img class="rounded-circle account-img" src="{{ user.userprofile.image.url }}">
                         <div class="media-body">
-                          <h2 class="account-heading">{{ user.username }}</h2>
+                          <h2 class="account-heading">{{ user.first_name }} {{ user.last_name }}</h2>
                           <p class="text-secondary">{{ user.email }}</p>
                         </div>
                       </div>
                       <!-- FORM HERE -->
                     </div>
 
-            <h2 class="content-subhead">Description</h2>
-            <p>
-                Worked in SberKek and now wanna something new =)
-            </p>
+            <h2 class="content-subhead">Description:</h2>
+            <p class="text-secondary">{{ user.userprofile.description }}</p>
+
+             <h2 class="content-subhead">Speciality:</h2>
+            <p class="text-secondary">{{ user.userprofile.speciality }}</p>
+
         </div>
     </div>
 </div>
