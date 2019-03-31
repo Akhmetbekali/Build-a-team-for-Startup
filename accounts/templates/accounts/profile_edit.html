@@ -1,3 +1,4 @@
+{% load crispy_forms_tags %}
 <!doctype html>
 <html lang="en">
 <head>
@@ -37,15 +38,12 @@
 
     <div id="main">
         <div class="content">
-            <form class="pure-form pure-form-stacked" method="post">
+            <form enctype="multipart/form-data" method="POST">
+
                 {% csrf_token %}
                 <fieldset>
-                    {% for field in form.visible_fields %}
-                        <label>{{ field.label_tag }}</label>
-                        {{ field }}
-                        <span class="pure-form-message-inline">{{ field.errors }}</span>
-                        <span class="pure-form-message-inline">{{ field.help_text }}</span>
-                    {% endfor %}
+                    {{ u_form|crispy }}
+                    {{ p_form|crispy }}
 
                     <button type="submit" class="pure-button pure-button-primary">Submit</button>
                 </fieldset>
