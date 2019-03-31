@@ -17,6 +17,15 @@ class UserProfile(models.Model):
     image = models.ImageField(upload_to='profile_image', blank=True)
 
 
+class ProjectPage(models.Model):
+    owner = models.OneToOneField(User, on_delete=models.SET_NULL, null=True)
+    # image = models.ImageField()
+
+    type = models.CharField(max_length=20, default='project')
+    title = models.CharField(max_length=30, default='New Project')
+    description = models.CharField(max_length=500, default='')
+
+
 def create_profile(sender, **kwargs):
     if kwargs['created']:
         user_profile = UserProfile.objects.create(user=kwargs['instance'])
@@ -27,6 +36,7 @@ post_save.connect(create_profile, sender=User)
 
 def __str__(self):
     return f'{self.user.username} UserProfile'
+
 
 def save(self):
     super().save()
