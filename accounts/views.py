@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 
-from accounts.forms import RegistrationForm, EditProfileForm, ProfileUpdateForm
+from accounts.forms import RegistrationForm, EditProfileForm, ProfileUpdateForm, ProjectCreateForm
+from accounts.models import ProjectPage
 from django.contrib.auth.forms import PasswordChangeForm
 from django.contrib.auth import update_session_auth_hash
 from django.contrib.auth.models import User
@@ -91,3 +92,29 @@ def catalog(request):
 def current_user(request):
     args = {'user': request.user}
     return render(request, 'accounts/profile.html', args)
+
+
+def projects(request):
+    projects = ProjectPage.objects.all()
+    return render(request, 'projects/projects_all.html', {
+        'projects': projects,
+    })
+
+
+def create_project(request):
+    if request.method == 'POST':
+        form = ProjectCreateForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('../project')
+        else:
+            args = {'form': form}
+            return render(request, 'projects/create.html', args)
+    else:
+        form = ProjectCreateForm()
+        args = {'form': form}
+        return render(request, 'projects/create.html', args)
+
+
+def edit_project(request):
+    pass

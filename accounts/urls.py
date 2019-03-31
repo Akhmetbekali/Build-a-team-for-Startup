@@ -22,4 +22,8 @@ urlpatterns = [
     url(r'^profile/$', views.profile),
     url(r'^profile/edit$', views.edit_profile),
     url(r'^catalog/$', views.catalog),
+
+    url(r'^projects/?$', views.projects),
+    url(r'^projects/create$', views.create_project),
+    url(r'^projects/edit$', views.edit_project),
 ]
