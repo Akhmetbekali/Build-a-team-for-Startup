@@ -1,3 +1,4 @@
+{% load crispy_forms_tags %}
 <!doctype html>
 <html lang="en">
 <head>
@@ -30,6 +31,7 @@
             <ul class="pure-menu-list">
                 <li class="pure-menu-item"><a href="." class="pure-menu-link">My profile</a></li>
                 <li class="pure-menu-item pure-menu-selected"><a href="#" class="pure-menu-link">Edit</a></li>
+                <li class="pure-menu-item"><a href="/account/catalog" class="pure-menu-link">Catalog</a></li>
                 <li class="pure-menu-item"><a href="logout" class="pure-menu-link">Log out</a></li>
             </ul>
         </div>
@@ -37,15 +39,12 @@
 
     <div id="main">
         <div class="content">
-            <form class="pure-form pure-form-stacked" method="post">
+            <form enctype="multipart/form-data" method="POST">
+
                 {% csrf_token %}
                 <fieldset>
-                    {% for field in form.visible_fields %}
-                        <label>{{ field.label_tag }}</label>
-                        {{ field }}
-                        <span class="pure-form-message-inline">{{ field.errors }}</span>
-                        <span class="pure-form-message-inline">{{ field.help_text }}</span>
-                    {% endfor %}
+                    {{ u_form|crispy }}
+                    {{ p_form|crispy }}
 
                     <button type="submit" class="pure-button pure-button-primary">Submit</button>
                 </fieldset>

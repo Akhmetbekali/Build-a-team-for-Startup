@@ -1,3 +1,4 @@
+{% load crispy_forms_tags %}
 <!doctype html>
 <html lang="en">
 <head>
@@ -28,6 +29,7 @@
             <ul class="pure-menu-list">
                 <li class="pure-menu-item pure-menu-selected"><a href="#" class="pure-menu-link">My profile</a></li>
                 <li class="pure-menu-item"><a href="edit" class="pure-menu-link">Edit</a></li>
+                <li class="pure-menu-item"><a href="/account/catalog" class="pure-menu-link">Catalog</a></li>
                 <li class="pure-menu-item"><a href="logout" class="pure-menu-link">Log out</a></li>
             </ul>
         </div>
@@ -35,27 +37,24 @@
 
     <div id="main">
         <div class="content">
-            <div class="pure-g">
-                <div class="pure-u-1 pure-u-md-1-2 pure-u-lg-1-2">
-                    <div class="l-box">
-                        <img class="pure-img-responsive" src="http://pixel-salad.com/website/cards/img/portrait-woman2.jpg" alt="My Photo">
-                    </div>
-                </div>
-                <div class="pure-u-1 pure-u-md-1-2 pure-u-lg-1-2">
-                    <div class="l-box">
-                        <h2>{{ user }}</h2>
-                        <h3>{{ user.first_name }}</h3>
-                        <h3> {{ user.last_name }}</h3>
-                        <h3> {{ user.email }}</h3>
-                        <h3>Junior Java Programmer</h3>
-                    </div>
-                </div>
-            </div>
+                <div class="content-section">
 
-            <h2 class="content-subhead">Description</h2>
-            <p>
-                Worked in SberKek and now wanna something new =)
-            </p>
+                      <div class="media">
+                        <img class="pure-img-responsive" src="{{ user.userprofile.image.url }}">
+                        <div class="media-body">
+                          <h2 class="account-heading">{{ user.first_name }} {{ user.last_name }}</h2>
+                          <p class="text-secondary">{{ user.email }}</p>
+                        </div>
+                      </div>
+                      <!-- FORM HERE -->
+                    </div>
+
+            <h2 class="content-subhead">Description:</h2>
+            <p class="text-secondary">{{ user.userprofile.description }}</p>
+
+             <h2 class="content-subhead">Speciality:</h2>
+            <p class="text-secondary">{{ user.userprofile.speciality }}</p>
+
         </div>
     </div>
 </div>
@@ -63,7 +62,6 @@
 
 
 
-<script src="js/ui.js"></script>
 
 </body>
 </html>
