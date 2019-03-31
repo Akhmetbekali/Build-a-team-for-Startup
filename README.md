@@ -49,6 +49,7 @@ Then after writing your email to corresponding field letter will come to this se
 * **Amir Subaev** - *Front-end* - [Apostrov](https://github.com/Apostrov)
 * **Anastasia Minakova** - *Front-end* - [Stalem9](https://github.com/stalem9)
 * **Ali Akhmetbek** - *Back-end* - [Akhmetbekali](https://github.com/Akhmetbekali)
+* **Kamil Alimov** - *Back-end* - [kamel2700](https://github.com/kamel2700)
 
 See also the list of [contributors](https://github.com/stalem9/Build-a-team-for-Startup/graphs/contributors) who participated in this project.
 
