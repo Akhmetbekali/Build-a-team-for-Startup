@@ -3,6 +3,7 @@ from django.shortcuts import render, redirect
 from accounts.forms import RegistrationForm, EditProfileForm, ProfileUpdateForm
 from django.contrib.auth.forms import PasswordChangeForm
 from django.contrib.auth import update_session_auth_hash
+from django.contrib.auth.models import User
 
 # Create your views here.
 
@@ -86,5 +87,13 @@ def change_password(request):
 
 
 def catalog(request):
+    # Edit HERE if authenticated
+    users = User.objects.all()
+    return render(request, 'accounts/users_catalog.html', {
+                'users': users,
+            })
+
+def current_user(request):
     args = {'user': request.user}
-    return render(request, 'accounts/change_password.html', args)
+
+    return render(request, 'accounts/profile.html', args)

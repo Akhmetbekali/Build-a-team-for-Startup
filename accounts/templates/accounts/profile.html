@@ -1,3 +1,4 @@
+{% load crispy_forms_tags %}
 <!doctype html>
 <html lang="en">
 <head>
@@ -28,6 +29,7 @@
             <ul class="pure-menu-list">
                 <li class="pure-menu-item pure-menu-selected"><a href="#" class="pure-menu-link">My profile</a></li>
                 <li class="pure-menu-item"><a href="edit" class="pure-menu-link">Edit</a></li>
+                <li class="pure-menu-item"><a href="/account/catalog" class="pure-menu-link">Catalog</a></li>
                 <li class="pure-menu-item"><a href="logout" class="pure-menu-link">Log out</a></li>
             </ul>
         </div>
@@ -36,6 +38,7 @@
     <div id="main">
         <div class="content">
                 <div class="content-section">
+
                       <div class="media">
                         <img class="pure-img-responsive" src="{{ user.userprofile.image.url }}">
                         <div class="media-body">
