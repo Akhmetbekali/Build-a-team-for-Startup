@@ -13,7 +13,6 @@ def home(request):
 
 
 def login_redirect(request):
-
     return redirect('account/')
 
 
@@ -34,7 +33,6 @@ def registration(request):
 
 def profile(request):
     args = {'user': request.user}
-
     return render(request, 'accounts/profile.html', args)
 
 
@@ -43,22 +41,18 @@ def edit_profile(request):
         u_form = EditProfileForm(request.POST,
                                  instance=request.user
                                  )
-
-
         p_form = ProfileUpdateForm(request.POST,
                                    request.FILES,
                                    instance=request.user.userprofile
                                    )
-
-
         if u_form.is_valid() and p_form.is_valid():
             u_form.save()
             p_form.save()
             return redirect('/account/profile')
         else:
             args = {
-            'p_form': p_form,
-            'u_form': u_form
+                'p_form': p_form,
+                'u_form': u_form
             }
             return render(request, 'accounts/profile_edit.html', args)
     else:
@@ -93,7 +87,7 @@ def catalog(request):
                 'users': users,
             })
 
+
 def current_user(request):
     args = {'user': request.user}
-
     return render(request, 'accounts/profile.html', args)
