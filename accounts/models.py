@@ -38,6 +38,7 @@ def __str__(self):
     return '{self.user.username} UserProfile'
 
 
+
 def save(self):
     super().save()
 
