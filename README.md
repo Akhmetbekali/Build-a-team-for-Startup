@@ -14,7 +14,7 @@ These instructions will get you a copy of the project up and running on your loc
 For running our project you need to install Django framework by entering following command in terminal
 
 ```
-pip install django
+pip install -r requirements.txt
 ```
 
 ### Installing
