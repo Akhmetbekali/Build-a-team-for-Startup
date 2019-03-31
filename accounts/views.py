@@ -3,6 +3,7 @@ from django.shortcuts import render, redirect
 from accounts.forms import RegistrationForm, EditProfileForm
 from django.contrib.auth.forms import PasswordChangeForm
 from django.contrib.auth import update_session_auth_hash
+from django.contrib.auth.decorators import login_required
 
 
 # Create your views here.
@@ -30,12 +31,12 @@ def registration(request):
         args = {'form': form}
         return render(request, 'accounts/registration.html', args)
 
-
+@login_required
 def profile(request):
     args = {'user': request.user}
-    return render(request, 'accounts/profile.html', args)
+    return render(request, 'accounts/profile2.html', args)
 
-
+@login_required
 def edit_profile(request):
     if request.method == 'POST':
         form = EditProfileForm(request.POST, instance=request.user)
@@ -50,7 +51,7 @@ def edit_profile(request):
         args = {'form': form}
         return render(request, 'accounts/profile_edit.html', args)
 
-
+@login_required
 def change_password(request):
     if request.method == 'POST':
         form = PasswordChangeForm(data=request.POST, user=request.user)
@@ -65,7 +66,7 @@ def change_password(request):
         args = {'form': form}
         return render(request, 'accounts/change_password.html', args)
 
-
+@login_required
 def catalog(request):
     args = {'user': request.user}
-    return render(request, 'accounts/change_password.html', args)
+    return render(request, 'accounts/users_catalog.html', args)

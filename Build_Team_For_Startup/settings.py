@@ -120,6 +120,9 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'Build_Team_For_Startup/media')
+
 LOGIN_REDIRECT_URL = '/account/profile'
 
 EMAIL_HOST = 'localhost'
