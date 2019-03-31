@@ -14,6 +14,7 @@ class UserProfile(models.Model):
     contact = models.CharField(max_length=20, default='')
     speciality = models.CharField(max_length=20, default='')
     description = models.CharField(max_length=100, default='')
+    image = models.ImageField(upload_to='profile_image', blank=True)
 
 
 def create_profile(sender, **kwargs):
