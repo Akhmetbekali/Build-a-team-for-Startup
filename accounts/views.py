@@ -6,11 +6,13 @@ from django.contrib.auth.forms import PasswordChangeForm
 from django.contrib.auth import update_session_auth_hash
 from django.contrib.auth.models import User
 
+
 # Create your views here.
 
 
 def home(request):
-    return render(request, 'accounts/home.html')
+    args = {'user': request.user}
+    return render(request, 'accounts/home.html', args)
 
 
 def login_redirect(request):
@@ -85,8 +87,8 @@ def catalog(request):
     # Edit HERE if authenticated
     users = User.objects.all()
     return render(request, 'accounts/users_catalog.html', {
-                'users': users,
-            })
+        'users': users,
+    })
 
 
 def current_user(request):

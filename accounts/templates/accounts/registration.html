@@ -32,11 +32,23 @@
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item">
-                    <a class="nav-link" href="../registration">Sign Up</a>
+                    <a class="nav-link" href="../catalog">Catalog</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="../login">Sign In</a>
-                </li>
+                {% if user.is_authenticated %}
+                    <li class="nav-item logged-in">
+                        <a class="nav-link" href="../profile">My profile</a>
+                    </li>
+                    <li class="nav-item logged-in">
+                        <a class="nav-link" href="../profile/logout">Log Out</a>
+                    </li>
+                {% else %}
+                    <li class="nav-item logged-out">
+                        <a class="nav-link" href="../registration">Sign Up</a>
+                    </li>
+                    <li class="nav-item logged-out">
+                        <a class="nav-link" href="../login">Sign In</a>
+                    </li>
+                {% endif %}
             </ul>
         </div>
 
@@ -51,7 +63,7 @@
                     <form class="form" method="post">
                         {% csrf_token %}
                         <div class="card-header card-header-primary text-center">
-                            <h4 class="card-title"> Registration </h4>l
+                            <h4 class="card-title"> Registration </h4>
                         </div>
                         <div class="card-body">
                             {% for field in form %}
@@ -82,7 +94,7 @@
         <nav>
             <ul>
                 <li>
-                    <a href="https://github.com/stalem9/Build-a-team-for-Startup">Github</a>
+                    <a href="https://github.com/stalem9/Build-a-team-for-Startup">see our project on Github</a>
                 </li>
             </ul>
         </nav>
