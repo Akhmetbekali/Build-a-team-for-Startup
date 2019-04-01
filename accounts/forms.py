@@ -2,7 +2,7 @@ from django import forms
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm, UserChangeForm, ReadOnlyPasswordHashField
 from accounts import views
-from accounts.models import UserProfile
+from accounts.models import UserProfile, ProjectPage
 
 
 class RegistrationForm(UserCreationForm):
@@ -52,3 +52,20 @@ class ProfileUpdateForm(forms.ModelForm):
         )
 
 
+class ProjectCreateForm(forms.ModelForm):
+    class Meta:
+        model = ProjectPage
+        fields = (
+            'title',
+            'type',
+            'description',
+        )
+
+    def save(self, commit=True):
+        project = super(ProjectCreateForm, self).save(commit=False)
+        project.title = self.cleaned_data['title']
+        project.type = self.cleaned_data['type']
+        project.description = self.cleaned_data['description']
+
+        if commit:
+            project.save()
