@@ -43,6 +43,7 @@ Then after writing your email to corresponding field letter will come to this se
 
 * [Django](https://docs.djangoproject.com/en/2.1/) - The web framework used
 * [SQLite](https://www.sqlite.org/docs.html) - Database Management System
+* [Material Kit](https://github.com/creativetimofficial/material-kit) - Bootstrap UI Kit inspired by material design
 
 ## Authors
 
