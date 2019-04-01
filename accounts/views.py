@@ -103,6 +103,10 @@ def create_project(request):
     if request.method == 'POST':
         form = ProjectCreateForm(request.POST)
         if form.is_valid():
+            form.save(commit=False)
+            form.owner = request.user
+            print(request.user)
+            print(form.owner)
             form.save()
             return redirect('../projects')
         else:

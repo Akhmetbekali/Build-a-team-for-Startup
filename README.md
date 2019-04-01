@@ -69,7 +69,7 @@ See also the list of [contributors](https://github.com/stalem9/Build-a-team-for-
 
 #### Second sprint
 
-* Sometimes, when you are not logged in, you can enter your profile, which is empty
 * If I want to change a small info, then site asks to change the password
+* If a user logs in under a non-existing account, nothing happens
 
 #### All the bugs will be fixed for the next sprint
