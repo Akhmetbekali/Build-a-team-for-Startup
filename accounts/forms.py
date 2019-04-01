@@ -30,6 +30,7 @@ class RegistrationForm(UserCreationForm):
 
 
 class EditProfileForm(forms.ModelForm):
+
     email = forms.EmailField(required=True)
     password = None
 
