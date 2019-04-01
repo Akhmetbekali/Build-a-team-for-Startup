@@ -11,6 +11,14 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css">
     <!-- Material Kit CSS -->
     <link href="material-kit-master/assets/css/material-kit.css?v=2.0.5" rel="stylesheet" />
+    <style>
+        body {
+            background-image: url('material-kit-master/assets/img/profile_city.jpg');
+            background-attachment: fixed;
+            background-size: cover;
+            background-position: top center;
+        }
+    </style>
 </head>
 <body>
 
@@ -28,11 +36,20 @@
         </div>
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav ml-auto">
-                <li class="nav-item">
+                <li class="nav-item logged-out">
                     <a class="nav-link" href="registration_page.html">Sign Up</a>
                 </li>
-                <li class="nav-item">
+                <li class="nav-item logged-out">
                     <a class="nav-link" href="login_page.html">Sign In</a>
+                </li>
+
+
+                <li class="nav-item logged-in">
+                    <a class="nav-link" href="user_profile.html">My profile</a>
+                </li>
+
+                <li class="nav-item logged-in">
+                    <a class="nav-link" href="index.html">Log Out</a>
                 </li>
             </ul>
         </div>
@@ -40,11 +57,11 @@
     </div>
 </nav>
 
-<div class="page-header header-filter" style="background-image: url('material-kit-master/assets/img/profile_city.jpg'); background-size: cover; background-position: top center;">
+<div class="page-header header-filter" style="padding-top: 5%">
     <div class="container" style="padding-left: 5px">
         <div class="card-columns" style="padding-left: 10px">
 
-            <div class="card mb-3" style="width: 350px; height: 200px; padding-left: 5px; padding-bottom: 5px; padding-top: 5px">
+            <div class="card mb-3" style="width: 100%; height: 10%; padding-left: 5px; padding-bottom: 5px; padding-top: 5px">
 
                 <div class="row no-gutters">
                     <div class="col-md-4">
@@ -69,7 +86,7 @@
                 </div>
             </div>
 
-            <div class="card mb-3" style="width: 350px; height: 200px; padding-left: 5px; padding-bottom: 5px; padding-top: 5px">
+            <div class="card mb-3" style="width: 100%; height: 10%; padding-left: 5px; padding-bottom: 5px; padding-top: 5px">
 
                 <div class="row no-gutters">
                     <div class="col-md-4">
@@ -94,7 +111,7 @@
                 </div>
             </div>
 
-            <div class="card mb-3" style="width: 350px; height: 200px; padding-left: 5px; padding-bottom: 5px; padding-top: 5px">
+            <div class="card mb-3" style="width: 100%; height: 10%; padding-left: 5px; padding-bottom: 5px; padding-top: 5px">
 
                 <div class="row no-gutters">
                     <div class="col-md-4">
@@ -119,7 +136,7 @@
                 </div>
             </div>
 
-            <div class="card mb-3" style="width: 350px; height: 200px; padding-left: 5px; padding-bottom: 5px; padding-top: 5px">
+            <div class="card mb-3" style="width: 100%; height: 10%; padding-left: 5px; padding-bottom: 5px; padding-top: 5px">
 
                 <div class="row no-gutters">
                     <div class="col-md-4">
@@ -144,7 +161,7 @@
                 </div>
             </div>
 
-            <div class="card mb-3" style="width: 350px; height: 200px; padding-left: 5px; padding-bottom: 5px; padding-top: 5px">
+            <div class="card mb-3" style="width: 100%; height: 10%; padding-left: 5px; padding-bottom: 5px; padding-top: 5px">
 
                 <div class="row no-gutters">
                     <div class="col-md-4">
@@ -169,6 +186,80 @@
                 </div>
             </div>
 
+            <div class="card mb-3" style="width: 100%; height: 10%; padding-left: 5px; padding-bottom: 5px; padding-top: 5px">
+
+                <div class="row no-gutters">
+                    <div class="col-md-4">
+                        <img src="http://pixel-salad.com/website/cards/img/portrait-woman2.jpg" class="card-img" alt="No photo">
+                    </div>
+                    <div class="col-md-8">
+                        <div class="card-body" align="right">
+                            <div class="description">
+                                <h6>Name Surname</h6>
+                                Junior Java Programmer
+                                Telegram: @NoName
+                                +71234567890
+
+                                <div class="rating">
+
+                                </div>
+                                <a class="btn btn-primary" href="user_profile.html">View Profile</a>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card mb-3" style="width: 100%; height: 10%; padding-left: 5px; padding-bottom: 5px; padding-top: 5px">
+
+                <div class="row no-gutters">
+                    <div class="col-md-4">
+                        <img src="http://pixel-salad.com/website/cards/img/portrait-woman2.jpg" class="card-img" alt="No photo">
+                    </div>
+                    <div class="col-md-8">
+                        <div class="card-body" align="right">
+                            <div class="description">
+                                <h6>Name Surname</h6>
+                                Junior Java Programmer
+                                Telegram: @NoName
+                                +71234567890
+
+                                <div class="rating">
+
+                                </div>
+                                <a class="btn btn-primary" href="user_profile.html">View Profile</a>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card mb-3" style="width: 100%; height: 10%; padding-left: 5px; padding-bottom: 5px; padding-top: 5px">
+
+                <div class="row no-gutters">
+                    <div class="col-md-4">
+                        <img src="http://pixel-salad.com/website/cards/img/portrait-woman2.jpg" class="card-img" alt="No photo">
+                    </div>
+                    <div class="col-md-8">
+                        <div class="card-body" align="right">
+                            <div class="description">
+                                <h6>Name Surname</h6>
+                                Junior Java Programmer
+                                Telegram: @NoName
+                                +71234567890
+
+                                <div class="rating">
+
+                                </div>
+                                <a class="btn btn-primary" href="user_profile.html">View Profile</a>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
         </div>
 
@@ -176,6 +267,10 @@
 </div>
 
 
+<style>
+    li.logged-in {display: none;}
+    li.logged-out {display: none;}
+</style>
 <!--   Core JS Files   -->
 <script src="material-kit-master/assets/js/core/jquery.min.js" type="text/javascript"></script>
 <script src="material-kit-master/assets/js/core/popper.min.js" type="text/javascript"></script>
@@ -189,6 +284,13 @@
 <script async defer src="https://buttons.github.io/buttons.js"></script>
 <!-- Control Center for Material Kit: parallax effects, scripts for the example pages etc -->
 <script src="material-kit-master/assets/js/material-kit.js?v=2.0.5" type="text/javascript"></script>
+<script>
+    if (/*check here if user is logged-in*/true){
+        $("li.logged-in").show();
+    } else {
+        $("li.logged-out").show();
+    }
+</script>
 
 </body>
 </html>

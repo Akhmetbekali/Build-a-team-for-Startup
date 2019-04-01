@@ -9,7 +9,6 @@ urlpatterns = [
     url(r'^login/$', LoginView.as_view(template_name='accounts/login.html')),
     url(r'^profile/logout/$', LogoutView.as_view(template_name='accounts/logout.html')),
     url(r'^registration/$', views.registration),
-    url(r'^change_password$', views.change_password),
 
     url(r'^reset_password/$', PasswordResetView.as_view(template_name="registration/password_reset_form.html")),
     url(r'^reset_password/done/', PasswordResetDoneView.as_view(), name='password_reset_done'),

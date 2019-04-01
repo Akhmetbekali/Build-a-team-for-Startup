@@ -6,11 +6,13 @@ from django.contrib.auth.forms import PasswordChangeForm
 from django.contrib.auth import update_session_auth_hash
 from django.contrib.auth.models import User
 
+
 # Create your views here.
 
 
 def home(request):
-    return render(request, 'accounts/home.html')
+    args = {'user': request.user}
+    return render(request, 'accounts/home.html', args)
 
 
 def login_redirect(request):
@@ -46,47 +48,38 @@ def edit_profile(request):
                                    request.FILES,
                                    instance=request.user.userprofile
                                    )
-        if u_form.is_valid() and p_form.is_valid():
+        password_form = PasswordChangeForm(data=request.POST, user=request.user)
+        if u_form.is_valid() and p_form.is_valid() and password_form.is_valid():
             u_form.save()
             p_form.save()
+            password_form.save()
+            update_session_auth_hash(request, password_form.user)
             return redirect('/account/profile')
         else:
             args = {
                 'p_form': p_form,
-                'u_form': u_form
+                'u_form': u_form,
+                'password_form': password_form,
             }
             return render(request, 'accounts/profile_edit.html', args)
     else:
         u_form = EditProfileForm(instance=request.user)
         p_form = ProfileUpdateForm(instance=request.user.userprofile)
+        password_form = PasswordChangeForm(data=request.POST, user=request.user)
         args = {
             'p_form': p_form,
-            'u_form': u_form
+            'u_form': u_form,
+            'password_form': password_form,
         }
         return render(request, 'accounts/profile_edit.html', args)
-
-
-def change_password(request):
-    if request.method == 'POST':
-        form = PasswordChangeForm(data=request.POST, user=request.user)
-        if form.is_valid():
-            form.save()
-            update_session_auth_hash(request, form.user)
-            return redirect('/account/profile')
-        else:
-            return redirect('/account/change_password')
-    else:
-        form = PasswordChangeForm(user=request.user)
-        args = {'form': form}
-        return render(request, 'accounts/change_password.html', args)
 
 
 def catalog(request):
     # Edit HERE if authenticated
     users = User.objects.all()
-    return render(request, 'accounts/users_catalog2.html', {
-                'users': users,
-            })
+    return render(request, 'accounts/users_catalog.html', {
+        'users': users,
+    })
 
 
 def current_user(request):
