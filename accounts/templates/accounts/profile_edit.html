@@ -43,7 +43,9 @@
                 {% csrf_token %}
                 <fieldset>
                     {{ u_form|crispy }}
+                    {{ password_form.visible_fields|crispy }}
                     {{ p_form|crispy }}
+
 
                     <button type="submit" class="pure-button pure-button-primary">Submit</button>
                 </fieldset>
