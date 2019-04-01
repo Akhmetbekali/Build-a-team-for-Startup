@@ -65,26 +65,25 @@
 
 
 <div class="main main-raised" style="margin-top: 8%">
-    <div style="padding-top: 100px;">
+    <div style="padding-top: 2%">
         <div class="container">
             <div class="row">
                 <div class="col">
                     <div class="row">
                         <div class="col-5">
-                            <img class="pure-img-responsive"
+                            <img class="img-raised rounded-circle img-fluid"
                                     {% if user.userprofile.image %} src="{{ user.userprofile.image.url }}" {% else %}
-                                 src="/media/default.jpg" {% endif %} alt="My Photo">
-
-                            <div>
-                                <h2>Шкала рейтинга (while static, will be done in the next sprint)</h2>
-                                Rating 5/5, 46 votes
-                            </div>
+                                 src="/media/default.png" {% endif %} alt="My Photo">
                         </div>
                         <div class="col">
 
                             <h1>{{ user.first_name }} {{ user.last_name }}</h1>
-
-                            <div>Contacts</div>
+                            <p><span class="badge badge-secondary">Rating 5/5, 46 votes</span></p>
+                            <p>{{ user.userprofile.speciality }}</p>
+                            <div>
+                                <p>{{ user.email }}</p>
+                                <p> {{ user.userprofile.contact }}</p>
+                            </div>
 
                             <h2 class="content-subhead">Description</h2>
                             <p>
@@ -94,16 +93,17 @@
                     </div>
                 </div>
                 <div class="col-2">
+                    {% if user.is_authenticated %}
                     <div class="my_profile">
-                        <a class="btn btn-primary" href="profile_edit.html">Edit Profile</a>
+                        <a class="btn btn-primary" href="edit">Edit Profile</a>
                         <a class="btn btn-primary" href="#">Create Project</a>
                     </div>
-
+                    {% else %}
                     <div class="other_profile">
                         <a class="btn btn-primary logged-in other_profile" href="#">Subscribe</a>
                         <a class="btn btn-primary logged-in other_profile" href="#">Offer Job</a>
                     </div>
-
+                    {% endif %}
                 </div>
 
             </div>
