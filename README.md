@@ -71,5 +71,6 @@ See also the list of [contributors](https://github.com/stalem9/Build-a-team-for-
 
 * For editing profile we need to fill in all the fields
 * If a user logs in under a non-existing account, nothing happens
+* Bug with catalog card that they are not in the correct order
 
 #### All the bugs will be fixed for the next sprint
