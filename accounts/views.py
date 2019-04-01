@@ -99,7 +99,7 @@ def create_project(request):
         form = ProjectCreateForm(request.POST)
         if form.is_valid():
             form.save()
-            return redirect('../project')
+            return redirect('../projects')
         else:
             args = {'form': form}
             return render(request, 'projects/create.html', args)

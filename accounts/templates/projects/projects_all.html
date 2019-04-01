@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>User Catalog</title>
+    <title>Projects Catalog</title>
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport"/>
@@ -61,24 +61,23 @@
 <div class="main main-raised">
     <div class="container" style="max-width: 100%">
         <div class="card-columns" style="padding-left: 10px">
-            {% for user in users %}
+            {% for project in projects %}
                 <div class="card mb-3" style="padding-left: 5px; padding-bottom: 5px; padding-top: 5px">
 
                     <div class="row no-gutters">
                         <div class="col-md-4">
-                            <img {% if user.userprofile.image %} src="{{ user.userprofile.image.url }}" {% else %} src="/media/default.png" {% endif %}
-                                    class="rounded img-fluid"  alt="No photo">
+                            <img src="/media/default.png" class="rounded img-fluid"  alt="No photo">
                         </div>
                         <div class="col-md-8">
                             <div class="card-body" align="right">
                                 <div class="description">
-                                    <h6>{{ user.first_name }} {{ user.last_name }}</h6>
-                                    <p>{{ user.userprofile.speciality }}</p>
-                                    <p>{{ user.email }}</p>
+                                    <h6>{{ project.title }}</h6>
+                                    <p>{{ project.type }}</p>
+                                    <p>{{ project.owner }}</p>
                                     <div class="rating">
 
                                     </div>
-                                    <a class="btn btn-primary" href="#pablo">View Profile</a>
+                                    <a class="btn btn-primary" href="#pablo">View Project</a>
 
                                 </div>
                             </div>

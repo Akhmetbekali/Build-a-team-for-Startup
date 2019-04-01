@@ -59,8 +59,16 @@ See also the list of [contributors](https://github.com/stalem9/Build-a-team-for-
 
 ### Our project is not that perfect right now, as a result we have some minor bugs:
 
+#### First sprint
+
 * If you enter the main page after successfull login you need to enter the system again
 * For now, you can not edit description, speciality and photo
 * Moreover, in edit profile page there is password warning, because we do not have an ability to change password (fixed)
 * To see the front-end of catalog page you need to run http://localhost:8000/account/catalog  
+
+#### Second sprint
+
+* Sometimes, when you are not logged in, you can enter your profile, which is empty
+* If I want to change a small info, then site asks to change the password
+
 #### All the bugs will be fixed for the next sprint
