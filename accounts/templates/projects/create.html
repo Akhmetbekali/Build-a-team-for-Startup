@@ -1,7 +1,8 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
+
 <head>
-    <title>User Catalog</title>
+    <title>Create project</title>
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport"/>
@@ -13,8 +14,8 @@
     <!-- Material Kit CSS -->
     <link href="/static/material-kit-master/assets/css/material-kit.css?v=2.0.5" rel="stylesheet"/>
 </head>
-<body>
 
+<body>
 <nav class="navbar navbar-color-on-scroll fixed-top navbar-expand-lg navbar-transparent" color-on-scroll="100">
     <div class="container">
         <div class="navbar-translate">
@@ -53,40 +54,36 @@
 
     </div>
 </nav>
-
-
-<div class="page-header header-filter" data-parallax="true"
-     style="height: 45vh; background-image: url('/static/material-kit-master/assets/img/city-profile.jpg'); transform: translate3d(0px, 0px, 0px);"></div>
-
-<div class="main main-raised">
-    <div class="container" style="max-width: 100%">
-        <div class="card-columns" style="padding-left: 10px">
-            {% for user in users %}
-                <div class="card mb-3" style="padding-left: 5px; padding-bottom: 5px; padding-top: 5px">
-
-                    <div class="row no-gutters">
-                        <div class="col-md-4">
-                            <img {% if user.userprofile.image %} src="{{ user.userprofile.image.url }}" {% else %} src="/media/default.png" {% endif %}
-                                    class="rounded img-fluid"  alt="No photo">
+<div class="page-header header-filter"
+     style="background-image: url('/static/material-kit-master/assets/img/bg7.jpg'); background-size: cover; background-position: top center;">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-4 col-md-6 ml-auto mr-auto">
+                <div class="card card-login">
+                    <form class="form" method="post">
+                        {% csrf_token %}
+                        <div class="card-header card-header-primary text-center">
+                            <h4 class="card-title"> Create project </h4>
                         </div>
-                        <div class="col-md-8">
-                            <div class="card-body" align="right">
-                                <div class="description">
-                                    <h6>{{ user.first_name }} {{ user.last_name }}</h6>
-                                    <p>{{ user.userprofile.speciality }}</p>
-                                    <p>{{ user.email }}</p>
-                                    <div class="rating">
-
+                        <div class="card-body">
+                            {% for field in form %}
+                                <span class="bmd-form-group">
+                                    <div class="input-group">
+                                         <input {% if field.name == "password1" or field.name == "password2"%}
+                                             type="password" {% else %}
+                                             type="{{ field.name }}" {% endif %}
+                                             name="{{ field.name }}" class="form-control"
+                                             style="margin-left: 20px" placeholder="{{ field.label }}">
                                     </div>
-                                    <a class="btn btn-primary" href="#pablo">View Profile</a>
-
-                                </div>
-                            </div>
+                                </span>
+                            {% endfor %}
                         </div>
-                    </div>
+                        <div class="footer text-center">
+                            <button type="submit" class="btn btn-primary btn-link btn-wd btn-lg">Get Started</button>
+                        </div>
+                    </form>
                 </div>
-            {% endfor %}
-
+            </div>
         </div>
     </div>
 </div>
@@ -116,6 +113,6 @@
 <script async defer src="https://buttons.github.io/buttons.js"></script>
 <!-- Control Center for Material Kit: parallax effects, scripts for the example pages etc -->
 <script src="/static/material-kit-master/assets/js/material-kit.js?v=2.0.5" type="text/javascript"></script>
-
 </body>
+
 </html>
