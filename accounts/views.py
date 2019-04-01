@@ -5,6 +5,7 @@ from accounts.models import ProjectPage
 from django.contrib.auth.forms import PasswordChangeForm
 from django.contrib.auth import update_session_auth_hash
 from django.contrib.auth.models import User
+from django.contrib.auth.decorators import login_required
 
 
 # Create your views here.
@@ -34,11 +35,13 @@ def registration(request):
         return render(request, 'accounts/registration.html', args)
 
 
+@login_required(login_url="/account/login")
 def profile(request):
     args = {'user': request.user}
     return render(request, 'accounts/profile.html', args)
 
 
+@login_required(login_url="/account/login")
 def edit_profile(request):
     if request.method == 'POST':
         u_form = EditProfileForm(request.POST,
@@ -82,6 +85,7 @@ def catalog(request):
     })
 
 
+@login_required(login_url="/account/login")
 def current_user(request):
     args = {'user': request.user}
     return render(request, 'accounts/profile.html', args)
@@ -94,6 +98,7 @@ def projects(request):
     })
 
 
+@login_required(login_url="/account/login")
 def create_project(request):
     if request.method == 'POST':
         form = ProjectCreateForm(request.POST)
@@ -109,5 +114,6 @@ def create_project(request):
         return render(request, 'projects/create.html', args)
 
 
+@login_required(login_url="/account/login")
 def edit_project(request):
     pass
