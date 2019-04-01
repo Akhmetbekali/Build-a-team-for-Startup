@@ -89,7 +89,7 @@ def change_password(request):
 def catalog(request):
     # Edit HERE if authenticated
     users = User.objects.all()
-    return render(request, 'accounts/users_catalog2.html', {
+    return render(request, 'accounts/users_catalog.html', {
                 'users': users,
             })
 
