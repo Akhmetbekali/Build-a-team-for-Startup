@@ -30,6 +30,7 @@ class RegistrationForm(UserCreationForm):
 
 
 class EditProfileForm(forms.ModelForm):
+
     email = forms.EmailField(required=True)
     password = None
 
@@ -63,9 +64,14 @@ class ProjectCreateForm(forms.ModelForm):
 
     def save(self, commit=True):
         project = super(ProjectCreateForm, self).save(commit=False)
+        project.owner = self.owner
         project.title = self.cleaned_data['title']
         project.type = self.cleaned_data['type']
         project.description = self.cleaned_data['description']
 
         if commit:
             project.save()
+
+    def __init__(self, *args, **kwargs):
+        self.owner = kwargs.pop('owner', None)
+        super(ProjectCreateForm, self).__init__(*args, **kwargs)

@@ -43,6 +43,7 @@ Then after writing your email to corresponding field letter will come to this se
 
 * [Django](https://docs.djangoproject.com/en/2.1/) - The web framework used
 * [SQLite](https://www.sqlite.org/docs.html) - Database Management System
+* [Material Kit](https://github.com/creativetimofficial/material-kit) - Bootstrap UI Kit inspired by material design
 
 ## Authors
 
@@ -59,8 +60,17 @@ See also the list of [contributors](https://github.com/stalem9/Build-a-team-for-
 
 ### Our project is not that perfect right now, as a result we have some minor bugs:
 
+#### First sprint
+
 * If you enter the main page after successfull login you need to enter the system again
 * For now, you can not edit description, speciality and photo
 * Moreover, in edit profile page there is password warning, because we do not have an ability to change password (fixed)
 * To see the front-end of catalog page you need to run http://localhost:8000/account/catalog  
+
+#### Second sprint
+
+* If I want to change a small info, then site asks to change the password
+* If a user logs in under a non-existing account, nothing happens
+* Bug with catalog card that they are not in the correct order
+
 #### All the bugs will be fixed for the next sprint

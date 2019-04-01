@@ -32,7 +32,10 @@
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item">
-                    <a class="nav-link" href="../catalog">Catalog</a>
+                    <a class="nav-link" href="../catalog">Worker Catalog</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="../projects">Project Catalog</a>
                 </li>
                 {% if user.is_authenticated %}
                     <li class="nav-item logged-in">
@@ -70,7 +73,7 @@
                                 <span class="bmd-form-group">
                                     <div class="input-group">
 
-                                         <input {% if field.name == "password1" or field.name == "password2"%}
+                                         <input {% if field.name == "password1" or field.name == "password2" %}
                                              type="password" {% else %}
                                              type="{{ field.name }}" {% endif %}
                                              name="{{ field.name }}" class="form-control"

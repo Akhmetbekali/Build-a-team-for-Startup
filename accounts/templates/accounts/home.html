@@ -32,7 +32,10 @@
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item">
-                    <a class="nav-link" href="catalog">Catalog</a>
+                    <a class="nav-link" href="catalog">Worker Catalog</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="projects">Project Catalog</a>
                 </li>
                 {% if user.is_authenticated %}
                     <li class="nav-item logged-in">
@@ -56,12 +59,12 @@
 </nav>
 
 <div class="page-header header-filter" data-parallax="true"
-     style="background-image: url('https://pbs.twimg.com/media/DXr2EB2X0AAwtBu.jpg')">
+     style="background-image: url('/media/team.jpg')">
     <div class="container">
         <div class="row">
             <div class="col-md-8 ml-auto mr-auto">
                 <div class="brand text-center">
-                    <h1>Find the Team of your Dream</h1>
+                    <h1>Find your Dream Team</h1>
                 </div>
             </div>
         </div>

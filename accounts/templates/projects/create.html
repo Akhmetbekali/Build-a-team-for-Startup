@@ -1,4 +1,3 @@
-{% load crispy_forms_tags %}
 <!doctype html>
 <html lang="en">
 
@@ -14,16 +13,6 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css">
     <!-- Material Kit CSS -->
     <link href="/static/material-kit-master/assets/css/material-kit.css?v=2.0.5" rel="stylesheet"/>
-
-    <style>
-        body {
-            background-image: url('/static/material-kit-master/assets/img/bg.jpg');
-            background-attachment: fixed;
-            background-size: cover;
-            background-position: top center;
-            background-color: rgba(58, 58, 58, 0.5)
-        }
-    </style>
 </head>
 
 <body>
@@ -68,36 +57,34 @@
 
     </div>
 </nav>
-
-<div class="main bg-transparent">
-    <div style="padding-top: 8%">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-4 col-md-6 ml-auto mr-auto">
-                    <div class="card card-login">
-                        <form class="form" method="post">
-                            {% csrf_token %}
-                            <div class="card-header card-header-primary text-center">
-                                <h4 class="card-title"> Create project </h4>
-                            </div>
-                            <div class="card-body">
-
-                                </span>
-                                {% for field in form %}
-                                    <span class="bmd-form-group">
+<div class="page-header header-filter"
+     style="background-image: url('/static/material-kit-master/assets/img/bg7.jpg'); background-size: cover; background-position: top center;">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-4 col-md-6 ml-auto mr-auto">
+                <div class="card card-login">
+                    <form class="form" method="post">
+                        {% csrf_token %}
+                        <div class="card-header card-header-primary text-center">
+                            <h4 class="card-title"> Create project </h4>
+                        </div>
+                        <div class="card-body">
+                            {% for field in form %}
+                                <span class="bmd-form-group">
                                     <div class="input-group">
-                                         <input type="password" name="{{ field.name }}" class="form-control"
+                                         <input {% if field.name == "password1" or field.name == "password2"%}
+                                             type="password" {% else %}
+                                             type="{{ field.name }}" {% endif %}
+                                             name="{{ field.name }}" class="form-control"
                                              style="margin-left: 20px" placeholder="{{ field.label }}">
                                     </div>
                                 </span>
-                                {% endfor %}
-                            </div>
-                            <div class="footer text-center">
-                                <button type="submit" class="btn btn-primary btn-link btn-wd btn-lg">Submit
-                                </button>
-                            </div>
-                        </form>
-                    </div>
+                            {% endfor %}
+                        </div>
+                        <div class="footer text-center">
+                            <button type="submit" class="btn btn-primary btn-link btn-wd btn-lg">Get Started</button>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>

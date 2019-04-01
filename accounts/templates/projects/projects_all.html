@@ -1,9 +1,7 @@
-{% load crispy_forms_tags %}
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <title>Create project</title>
+    <title>Projects Catalog</title>
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport"/>
@@ -14,19 +12,9 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css">
     <!-- Material Kit CSS -->
     <link href="/static/material-kit-master/assets/css/material-kit.css?v=2.0.5" rel="stylesheet"/>
-
-    <style>
-        body {
-            background-image: url('/static/material-kit-master/assets/img/bg.jpg');
-            background-attachment: fixed;
-            background-size: cover;
-            background-position: top center;
-            background-color: rgba(58, 58, 58, 0.5)
-        }
-    </style>
 </head>
-
 <body>
+
 <nav class="navbar navbar-color-on-scroll fixed-top navbar-expand-lg navbar-transparent" color-on-scroll="100">
     <div class="container">
         <div class="navbar-translate">
@@ -43,24 +31,24 @@
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item">
-                    <a class="nav-link" href="../catalog">Worker Catalog</a>
+                    <a class="nav-link" href="catalog">Worker Catalog</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="../projects">Project Catalog</a>
+                    <a class="nav-link" href="">Project Catalog</a>
                 </li>
                 {% if user.is_authenticated %}
                     <li class="nav-item logged-in">
-                        <a class="nav-link" href="../profile">My profile</a>
+                        <a class="nav-link" href="profile">My profile</a>
                     </li>
                     <li class="nav-item logged-in">
-                        <a class="nav-link" href="../profile/logout">Log Out</a>
+                        <a class="nav-link" href="profile/logout">Log Out</a>
                     </li>
                 {% else %}
                     <li class="nav-item logged-out">
-                        <a class="nav-link" href="../registration">Sign Up</a>
+                        <a class="nav-link" href="registration">Sign Up</a>
                     </li>
                     <li class="nav-item logged-out">
-                        <a class="nav-link" href="../login">Sign In</a>
+                        <a class="nav-link" href="login">Sign In</a>
                     </li>
                 {% endif %}
             </ul>
@@ -69,37 +57,38 @@
     </div>
 </nav>
 
-<div class="main bg-transparent">
-    <div style="padding-top: 8%">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-4 col-md-6 ml-auto mr-auto">
-                    <div class="card card-login">
-                        <form class="form" method="post">
-                            {% csrf_token %}
-                            <div class="card-header card-header-primary text-center">
-                                <h4 class="card-title"> Create project </h4>
-                            </div>
-                            <div class="card-body">
 
-                                </span>
-                                {% for field in form %}
-                                    <span class="bmd-form-group">
-                                    <div class="input-group">
-                                         <input type="password" name="{{ field.name }}" class="form-control"
-                                             style="margin-left: 20px" placeholder="{{ field.label }}">
+<div class="page-header header-filter" data-parallax="true"
+     style="height: 45vh; background-image: url('/static/material-kit-master/assets/img/city-profile.jpg'); transform: translate3d(0px, 0px, 0px);"></div>
+
+<div class="main main-raised">
+    <div class="container" style="max-width: 100%">
+        <div class="card-columns" style="padding-left: 10px">
+            {% for project in projects %}
+                <div class="card mb-3" style="padding-left: 5px; padding-bottom: 5px; padding-top: 5px">
+
+                    <div class="row no-gutters">
+                        <div class="col-md-4">
+                            <img src="/media/default.png" class="rounded img-fluid" alt="No photo">
+                        </div>
+                        <div class="col-md-8">
+                            <div class="card-body" align="right">
+                                <div class="description">
+                                    <h6>{{ project.title }}</h6>
+                                    <p>{{ project.type }}</p>
+                                    <p>{{ project.owner }}</p>
+                                    <div class="rating">
+
                                     </div>
-                                </span>
-                                {% endfor %}
+                                    <a class="btn btn-primary" href="#pablo">View Project</a>
+
+                                </div>
                             </div>
-                            <div class="footer text-center">
-                                <button type="submit" class="btn btn-primary btn-link btn-wd btn-lg">Submit
-                                </button>
-                            </div>
-                        </form>
+                        </div>
                     </div>
                 </div>
-            </div>
+            {% endfor %}
+
         </div>
     </div>
 </div>
@@ -129,6 +118,6 @@
 <script async defer src="https://buttons.github.io/buttons.js"></script>
 <!-- Control Center for Material Kit: parallax effects, scripts for the example pages etc -->
 <script src="/static/material-kit-master/assets/js/material-kit.js?v=2.0.5" type="text/javascript"></script>
-</body>
 
+</body>
 </html>
