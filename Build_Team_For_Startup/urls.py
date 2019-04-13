@@ -25,7 +25,7 @@ from django.conf.urls.static import static
 urlpatterns = [
     url(r'^$', views.login_redirect),
     path('admin/', admin.site.urls),
-    url('account/', include("accounts.urls"))
+    url(r'^account/', include(('accounts.urls', 'name'), namespace='accounts')),
 ]
 
 if settings.DEBUG:

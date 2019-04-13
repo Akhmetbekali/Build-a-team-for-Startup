@@ -36,8 +36,12 @@ def registration(request):
 
 
 @login_required(login_url="/account/login")
-def profile(request):
-    args = {'user': request.user}
+def profile(request, id=None):
+    if id:
+        user = User.objects.get(id=id)
+    else:
+        user = request.user
+    args = {'user': user}
     return render(request, 'accounts/profile.html', args)
 
 

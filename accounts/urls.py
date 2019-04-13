@@ -19,7 +19,9 @@ urlpatterns = [
         PasswordResetCompleteView.as_view(template_name='accounts/password_reset_complete.html'),
         name='password_reset_complete'),
 
-    url(r'^profile/$', views.profile),
+    url(r'^profile/$', views.profile, name='profile'),
+    url(r'^profile/(?P<id>\d+)/$', views.profile, name='profile_with_id'),
+
     url(r'^profile/edit$', views.edit_profile),
     url(r'^catalog/$', views.catalog),
 
