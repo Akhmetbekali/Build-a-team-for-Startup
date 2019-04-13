@@ -75,6 +75,7 @@
 
                                          <input {% if field.name == "password1" or field.name == "password2" %}
                                              type="password" {% else %}
+                                             value="{{ field.value }}"
                                              type="{{ field.name }}" {% endif %}
                                              name="{{ field.name }}" class="form-control"
                                              style="margin-left: 20px" placeholder="{{ field.label }}">
