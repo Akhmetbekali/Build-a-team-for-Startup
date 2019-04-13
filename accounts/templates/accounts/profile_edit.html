@@ -91,7 +91,7 @@
                                              type="password" {% else %}
                                              type="{{ field.name }}" {% endif %}
                                              name="{{ field.name }}" class="form-control"
-                                             style="margin-left: 20px" placeholder="{{ field.label }}">
+                                             style="margin-left: 20px" placeholder="{{ field.label }}" value="{{ field.value }}">
                                     </div>
                                 </span>
                                 {% endfor %}
@@ -102,7 +102,7 @@
                                             <div style="margin-left: 20px">{{ field|as_crispy_field }}</div>
                                         {% else %}
                                             <input type="{{ field.name }}" name="{{ field.name }}" class="form-control"
-                                                   style="margin-left: 20px" placeholder="{{ field.label }}">
+                                                   style="margin-left: 20px" placeholder="{{ field.label }}" value="{{ field.value }}">
                                         {% endif %}
                                     </div>
                                 </span>
