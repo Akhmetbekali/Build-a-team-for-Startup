@@ -75,7 +75,8 @@
                                     <div class="input-group">
                                         <input type="{{ field.name }}" name="{{ field.name }}" class="form-control"
                                                style="margin-left: 20px" placeholder="{{ field.label }}"
-                                            {% if field.name != "password" %} value="{{ field.value }}" {% endif %}>
+                                                {% if field.name != "password" and field.value != None %}
+                                               value="{{ field.value }}" {% endif %}>
                                     </div>
                                 </span>
                             {% endfor %}
