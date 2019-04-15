@@ -2,7 +2,8 @@ from django.contrib.auth import update_session_auth_hash
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import PasswordChangeForm
 from django.contrib.auth.models import User
-from django.shortcuts import render, redirect
+from django.http import HttpResponseRedirect
+from django.shortcuts import render, redirect, get_object_or_404
 
 from accounts.forms import RegistrationForm, EditProfileForm, ProfileUpdateForm, ProjectCreateForm
 from accounts.models import ProjectPage
@@ -37,11 +38,10 @@ def registration(request):
 
 @login_required(login_url="/account/login")
 def profile(request, id=None):
-    if id:
-        user = User.objects.get(id=id)
-    else:
-        user = request.user
-    args = {'user': user}
+    if id is None:
+        return HttpResponseRedirect('/account/profile/%d/' % request.user.id)
+    user = get_object_or_404(User, id=id)
+    args = {'id': user.id, 'user': request.user}
     return render(request, 'accounts/profile.html', args)
 
 

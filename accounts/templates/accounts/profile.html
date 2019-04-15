@@ -97,7 +97,7 @@
                     </div>
                 </div>
                 <div class="col-2">
-                    {% if user.is_authenticated %}
+                    {% if user.id == id %}
                         <div class="my_profile">
                             <a class="btn btn-primary" href="{% url 'accounts:profile_edit' %}">Edit Profile</a>
                             <a class="btn btn-primary" href="{% url 'accounts:project_create' %}">Create Project</a>
