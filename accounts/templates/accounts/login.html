@@ -28,7 +28,7 @@
 <nav class="navbar navbar-color-on-scroll fixed-top navbar-expand-lg navbar-transparent" color-on-scroll="100">
     <div class="container">
         <div class="navbar-translate">
-            <a class="navbar-brand" href=".."> Build a team for startup </a>
+            <a class="navbar-brand" href="{% url 'accounts:home' %}"> Build a team for startup </a>
 
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
                     aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -41,24 +41,24 @@
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item">
-                    <a class="nav-link" href="../catalog">Worker Catalog</a>
+                    <a class="nav-link" href="{% url 'accounts:profiles_catalog' %}">Worker Catalog</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="../projects">Project Catalog</a>
+                    <a class="nav-link" href="{% url 'accounts:projects_catalog' %}">Project Catalog</a>
                 </li>
                 {% if user.is_authenticated %}
                     <li class="nav-item logged-in">
-                        <a class="nav-link" href="../profile">My profile</a>
+                        <a class="nav-link" href="{% url 'accounts:profile' %}">My profile</a>
                     </li>
                     <li class="nav-item logged-in">
-                        <a class="nav-link" href="../profile/logout">Log Out</a>
+                        <a class="nav-link" href="{% url 'accounts:logout' %}">Log Out</a>
                     </li>
                 {% else %}
                     <li class="nav-item logged-out">
-                        <a class="nav-link" href="../registration">Sign Up</a>
+                        <a class="nav-link" href="{% url 'accounts:registration' %}">Sign Up</a>
                     </li>
                     <li class="nav-item logged-out">
-                        <a class="nav-link" href="../login">Sign In</a>
+                        <a class="nav-link" href="{% url 'accounts:login' %}">Sign In</a>
                     </li>
                 {% endif %}
             </ul>
@@ -109,7 +109,7 @@
                             </div>
                             <div class="footer text-center">
                                 <button type="submit" class="btn btn-primary btn-link btn-wd btn-lg">Sign In</button>
-                                <a href="../reset_password" class="btn btn-primary btn-link btn-wd btn-lg">Reset
+                                <a href="{% url 'accounts:password_reset' %}" class="btn btn-primary btn-link btn-wd btn-lg">Reset
                                     Password
                                     <div class="ripple-container"></div>
                                 </a>
