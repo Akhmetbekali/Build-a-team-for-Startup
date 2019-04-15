@@ -105,3 +105,7 @@ venv.bak/
 
 # PyCharm IDE
 .idea
+
+# SonarScanner
+.scannerwork
+sonar-project.properties
