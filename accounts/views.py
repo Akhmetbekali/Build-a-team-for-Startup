@@ -2,9 +2,10 @@ from django.contrib.auth import update_session_auth_hash
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import PasswordChangeForm
 from django.contrib.auth.models import User
-from django.shortcuts import render, redirect
+from django.http import HttpResponseRedirect
+from django.shortcuts import render, redirect, get_object_or_404
 
-from accounts.forms import RegistrationForm, EditProfileForm, ProfileUpdateForm, ProjectCreateForm
+from accounts.forms import RegistrationForm, EditProfileForm, ProfileUpdateForm, ProjectCreateForm, EditProjectForm
 from accounts.models import ProjectPage
 
 
@@ -37,11 +38,10 @@ def registration(request):
 
 @login_required(login_url="/account/login")
 def profile(request, id=None):
-    if id:
-        user = User.objects.get(id=id)
-    else:
-        user = request.user
-    args = {'user': user}
+    if id is None:
+        return HttpResponseRedirect('/account/profile/%d/' % request.user.id)
+    user = get_object_or_404(User, id=id)
+    args = {'id': user.id, 'user': request.user}
     return render(request, 'accounts/profile.html', args)
 
 
@@ -77,10 +77,13 @@ def edit_profile(request):
 
 
 def catalog(request):
-    # Edit HERE if authenticated
+    user = None
+    if request.user.is_authenticated:
+        user = request.user
     users = User.objects.all()
     return render(request, 'accounts/users_catalog.html', {
         'users': users,
+        'current_user': user
     })
 
 
@@ -115,7 +118,26 @@ def create_project(request):
 
 @login_required(login_url="/account/login")
 def edit_project(request):
-    pass
+    if request.method == 'POST':
+        project_form = EditProjectForm(request.POST,
+                                       # request.FILES,
+                                       instance=request.project
+                                       )
+        if project_form.is_valid():
+            project_form.save()
+
+            return redirect('projects/projects_all.html')
+        else:
+            args = {
+                'p_form': project_form
+            }
+            return render(request, 'projects/project_edit.html', args)
+    else:
+        project_form = EditProjectForm(instance=request.project)
+        args = {
+            'project_form': project_form,
+        }
+        return render(request, 'projects/project_edit.html', args)
 
 
 @login_required(login_url="/account/login")

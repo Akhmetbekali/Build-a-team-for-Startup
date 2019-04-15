@@ -19,7 +19,7 @@
             background-attachment: fixed;
             background-size: cover;
             background-position: top center;
-            background-color: rgba(58,58,58,0.5)
+            background-color: rgba(58, 58, 58, 0.5)
         }
     </style>
 </head>
@@ -28,7 +28,7 @@
 <nav class="navbar fixed-top navbar-expand-lg" color-on-scroll="100">
     <div class="container">
         <div class="navbar-translate">
-            <a class="navbar-brand" href="/"> Build a team for startup </a>
+            <a class="navbar-brand" href="{% url 'accounts:home' %}"> Build a team for startup </a>
 
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
                     aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -41,28 +41,29 @@
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item">
-                    <a class="nav-link" href="{% url 'accounts:catalog' %}">Worker Catalog</a>
+                    <a class="nav-link" href="{% url 'accounts:profiles_catalog' %}">Worker Catalog</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="../projects">Project Catalog</a>
+                    <a class="nav-link" href="{% url 'accounts:projects_catalog' %}">Project Catalog</a>
                 </li>
                 {% if user.is_authenticated %}
                     <li class="nav-item logged-in">
-                        <a class="nav-link" href="../profile">My profile</a>
+                        <a class="nav-link" href="{% url 'accounts:profile' %}">My profile</a>
                     </li>
                     <li class="nav-item logged-in">
-                        <a class="nav-link" href="../profile/logout">Log Out</a>
+                        <a class="nav-link" href="{% url 'accounts:logout' %}">Log Out</a>
                     </li>
                 {% else %}
                     <li class="nav-item logged-out">
-                        <a class="nav-link" href="../registration">Sign Up</a>
+                        <a class="nav-link" href="{% url 'accounts:registration' %}">Sign Up</a>
                     </li>
                     <li class="nav-item logged-out">
-                        <a class="nav-link" href="../login">Sign In</a>
+                        <a class="nav-link" href="{% url 'accounts:login' %}">Sign In</a>
                     </li>
                 {% endif %}
             </ul>
         </div>
+
     </div>
 </nav>
 
@@ -96,16 +97,16 @@
                     </div>
                 </div>
                 <div class="col-2">
-                    {% if user.is_authenticated %}
-                    <div class="my_profile">
-                        <a class="btn btn-primary" href="edit">Edit Profile</a>
-                        <a class="btn btn-primary" href="../projects/create">Create Project</a>
-                    </div>
+                    {% if user.id == id %}
+                        <div class="my_profile">
+                            <a class="btn btn-primary" href="{% url 'accounts:profile_edit' %}">Edit Profile</a>
+                            <a class="btn btn-primary" href="{% url 'accounts:project_create' %}">Create Project</a>
+                        </div>
                     {% else %}
-                    <div class="other_profile">
-                        <a class="btn btn-primary logged-in other_profile" href="#">Subscribe</a>
-                        <a class="btn btn-primary logged-in other_profile" href="#">Offer Job</a>
-                    </div>
+                        <div class="other_profile">
+                            <a class="btn btn-primary logged-in other_profile" href="#">Subscribe</a>
+                            <a class="btn btn-primary logged-in other_profile" href="#">Offer Job</a>
+                        </div>
                     {% endif %}
                 </div>
 
