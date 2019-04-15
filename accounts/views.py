@@ -1,11 +1,11 @@
+from django.contrib.auth import update_session_auth_hash
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.forms import PasswordChangeForm
+from django.contrib.auth.models import User
 from django.shortcuts import render, redirect
 
 from accounts.forms import RegistrationForm, EditProfileForm, ProfileUpdateForm, ProjectCreateForm
 from accounts.models import ProjectPage
-from django.contrib.auth.forms import PasswordChangeForm
-from django.contrib.auth import update_session_auth_hash
-from django.contrib.auth.models import User
-from django.contrib.auth.decorators import login_required
 
 
 # Create your views here.
@@ -36,8 +36,12 @@ def registration(request):
 
 
 @login_required(login_url="/account/login")
-def profile(request):
-    args = {'user': request.user}
+def profile(request, id=None):
+    if id:
+        user = User.objects.get(id=id)
+    else:
+        user = request.user
+    args = {'user': user}
     return render(request, 'accounts/profile.html', args)
 
 
