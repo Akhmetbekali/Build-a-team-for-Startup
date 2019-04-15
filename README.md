@@ -72,4 +72,7 @@ See also the list of [contributors](https://github.com/stalem9/Build-a-team-for-
 * For editing profile we need to fill in all the fields
 * If a user logs in under a non-existing account, nothing happens
 
+#### Third sprint
+
+* Only prototypes of comments and work history sections in user profile are ready now
 #### All the bugs will be fixed for the next sprint
