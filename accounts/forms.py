@@ -75,3 +75,13 @@ class ProjectCreateForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         self.owner = kwargs.pop('owner', None)
         super(ProjectCreateForm, self).__init__(*args, **kwargs)
+
+
+class EditProjectForm(forms.ModelForm):
+    class Meta:
+        model = ProjectPage
+        fields = (
+            'title',
+            'type',
+            'description',
+        )
