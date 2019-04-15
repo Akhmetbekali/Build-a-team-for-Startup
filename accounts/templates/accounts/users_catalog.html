@@ -12,6 +12,8 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css">
     <!-- Material Kit CSS -->
     <link href="/static/material-kit-master/assets/css/material-kit.css?v=2.0.5" rel="stylesheet"/>
+
+    <link href="/static/css/stylesheet.css" rel="stylesheet"/>
 </head>
 <body>
 
@@ -64,32 +66,64 @@
 <div class="main main-raised">
     <div class="container" style="max-width: 100%">
         <div class="card-columns" style="padding-left: 10px">
-            {% for user in users %}
-                <div class="card mb-3"
-                     style="width: 100%; height: 10%; padding-left: 5px; padding-bottom: 5px; padding-top: 5px">
-
-                    <div class="row no-gutters">
-                        <div class="col-md-4">
-                            <img {% if user.userprofile.image %} src="{{ user.userprofile.image.url }}" {% else %}
-                                                                 src="/media/default.png" {% endif %}
-                                                                 class="rounded img-fluid" alt="No photo">
-                        </div>
-                        <div class="col-md-8">
-                            <div class="card-body" align="right">
-                                <div class="description">
-                                    <h6>{{ user.first_name }} {{ user.last_name }}</h6>
-                                    <p>{{ user.userprofile.speciality }}</p>
-                                    <p>{{ user.email }}</p>
-                                    <div class="rating">
-
-                                    </div>
-                                    <a class="btn btn-primary" href="{% url 'accounts:profile_with_id' id=user.id %}">View User</a>
+            <div class="card mb-3">
+                <div class="row no-gutters">
+                    <div class="col-md-4">
+                        <img {% if current_user.userprofile.image %}
+                            src="{{ current_user.userprofile.image.url }}" {% else %}
+                            src="/media/default.png" {% endif %}
+                            class="rounded img-fluid" alt="No photo">
+                    </div>
+                    <div class="col-md-8">
+                        <div class="card-body" align="right">
+                            <div class="description">
+                                <h6>{{ current_user.first_name }} {{ current_user.last_name }}</h6>
+                                <p>{{ current_user.userprofile.speciality }}</p>
+                                <p>{{ current_user.email }}</p>
+                                <div class="rating">
 
                                 </div>
+                                <a class="btn btn-primary"
+                                   href="{% url 'accounts:profile_with_id' id=current_user.id %}">View
+                                    User</a>
+
                             </div>
                         </div>
                     </div>
                 </div>
+            </div>
+        </div>
+        <hr class="disappear">
+        <div class="card-columns" style="padding-left: 10px">
+            {% for user in users %}
+                {% if user != current_user %}
+                    <div class="card mb-3"
+                         style="width: 100%; height: 10%; padding-left: 5px; padding-bottom: 5px; padding-top: 5px">
+
+                        <div class="row no-gutters">
+                            <div class="col-md-4">
+                                <img {% if user.userprofile.image %} src="{{ user.userprofile.image.url }}" {% else %}
+                                                                     src="/media/default.png" {% endif %}
+                                                                     class="rounded img-fluid" alt="No photo">
+                            </div>
+                            <div class="col-md-8">
+                                <div class="card-body" align="right">
+                                    <div class="description">
+                                        <h6>{{ user.first_name }} {{ user.last_name }}</h6>
+                                        <p>{{ user.userprofile.speciality }}</p>
+                                        <p>{{ user.email }}</p>
+                                        <div class="rating">
+
+                                        </div>
+                                        <a class="btn btn-primary"
+                                           href="{% url 'accounts:profile_with_id' id=user.id %}">View User</a>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {% endif %}
             {% endfor %}
 
         </div>

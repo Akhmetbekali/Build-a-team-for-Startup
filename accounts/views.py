@@ -77,10 +77,13 @@ def edit_profile(request):
 
 
 def catalog(request):
-    # Edit HERE if authenticated
+    user = None
+    if request.user.is_authenticated:
+        user = request.user
     users = User.objects.all()
     return render(request, 'accounts/users_catalog.html', {
         'users': users,
+        'current_user': user
     })
 
 
