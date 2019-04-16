@@ -36,7 +36,6 @@ def registration(request):
         return render(request, 'accounts/registration.html', args)
 
 
-#@login_required(login_url="/account/login")
 def profile(request, id=None):
     if id is None:
         return HttpResponseRedirect('/account/profile/%d/' % request.user.id)
@@ -100,10 +99,7 @@ def projects_catalog(request):
     })
 
 
-def project_page(request, id=None):
-    # не знаю куда ссылаться если айдишка проекта не правильная
-    if id is None:
-        return HttpResponseRedirect('/account/profile/%d/' % request.user.id)
+def project_page(request, id):
     project = get_object_or_404(ProjectPage, id=id)
     args = {'project': project}
     return render(request, 'projects/project.html', args)

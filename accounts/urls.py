@@ -26,7 +26,7 @@ urlpatterns = [
     url(r'^catalog/$', views.catalog, name='profiles_catalog'),
 
     url(r'^projects_catalog/?$', views.projects_catalog, name='projects_catalog'),
-    url(r'^project/(?P<id>\d+)/$', views.project_page, name='projects_catalog'),
+    url(r'^project/(?P<id>\d+)/$', views.project_page, name='project'),
 
     url(r'^projects/create$', views.create_project, name='project_create'),
     url(r'^projects/edit$', views.edit_project, name='project_edit'),
