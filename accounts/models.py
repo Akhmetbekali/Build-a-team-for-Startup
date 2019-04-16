@@ -26,6 +26,18 @@ class ProjectPage(models.Model):
     description = models.CharField(max_length=500, default='')
 
 
+def create_profile(sender, **kwargs):
+    if kwargs['created']:
+        user_profile = UserProfile.objects.create(user=kwargs['instance'])
+
+
+post_save.connect(create_profile, sender=User)
+
+
+def __str__(self):
+    return '{self.user.username} UserProfile'
+
+
 def save(self):
     super().save()
 
