@@ -81,9 +81,9 @@
 
                             <h1>{{ project.title }}</h1>
                             <p><span class="badge badge-secondary">Rating 5/5, 46 votes</span></p>
-                            <p>{{ project.type }}</p>
+                            <p>Type: {{ project.type }}</p>
                             <div>
-                                <a href="{% url 'accounts:profile_with_id' id=project.owner.id %}" class="stretched-link font-weight-bold">{{ project.owner }}</a>
+                                Owner:  <a href="{% url 'accounts:profile_with_id' id=project.owner.id %}" class="stretched-link font-weight-bold">{{ project.owner }}</a>
                             </div>
 
                             <h2 class="content-subhead">Description</h2>
