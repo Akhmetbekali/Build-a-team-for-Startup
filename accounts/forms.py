@@ -43,6 +43,7 @@ class EditProfileForm(forms.ModelForm):
         )
 
 
+
 class ProfileUpdateForm(forms.ModelForm):
     class Meta:
         model = UserProfile
