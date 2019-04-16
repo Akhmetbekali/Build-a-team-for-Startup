@@ -101,7 +101,7 @@ def projects_catalog(request):
 
 def project_page(request, id):
     project = get_object_or_404(ProjectPage, id=id)
-    args = {'project': project}
+    args = {'project': project, 'current_user': request.user}
     return render(request, 'projects/project.html', args)
 
 
@@ -111,7 +111,7 @@ def create_project(request):
         form = ProjectCreateForm(request.POST, owner=request.user)
         if form.is_valid():
             form.save()
-            return redirect('../projects')
+            return redirect('../projects_catalog')
         else:
             args = {'form': form}
             return render(request, 'projects/create.html', args)
