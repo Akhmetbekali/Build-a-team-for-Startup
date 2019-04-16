@@ -36,12 +36,12 @@ def registration(request):
         return render(request, 'accounts/registration.html', args)
 
 
-@login_required(login_url="/account/login")
+#@login_required(login_url="/account/login")
 def profile(request, id=None):
     if id is None:
         return HttpResponseRedirect('/account/profile/%d/' % request.user.id)
     user = get_object_or_404(User, id=id)
-    args = {'id': user.id, 'user': request.user}
+    args = {'id': user.id, 'user': user}
     return render(request, 'accounts/profile.html', args)
 
 
