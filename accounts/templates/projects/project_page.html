@@ -1,7 +1,7 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-    <title>Projects Catalog</title>
+    <title>Project Page</title>
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport"/>
@@ -12,10 +12,20 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css">
     <!-- Material Kit CSS -->
     <link href="/static/material-kit-master/assets/css/material-kit.css?v=2.0.5" rel="stylesheet"/>
+
+    <style>
+        body {
+            background-image: url('/static/material-kit-master/assets/img/bg.jpg');
+            background-attachment: fixed;
+            background-size: cover;
+            background-position: top center;
+            background-color: rgba(58, 58, 58, 0.5)
+        }
+    </style>
 </head>
 <body>
 
-<nav class="navbar navbar-color-on-scroll fixed-top navbar-expand-lg navbar-transparent" color-on-scroll="100">
+<nav class="navbar fixed-top navbar-expand-lg" color-on-scroll="100">
     <div class="container">
         <div class="navbar-translate">
             <a class="navbar-brand" href="{% url 'accounts:home' %}"> Build a team for startup </a>
@@ -58,38 +68,57 @@
 </nav>
 
 
-<div class="page-header header-filter" data-parallax="true"
-     style="height: 45vh; background-image: url('/static/material-kit-master/assets/img/city-profile.jpg'); transform: translate3d(0px, 0px, 0px);"></div>
-
-<div class="main main-raised">
-    <div class="container" style="max-width: 100%">
-        <div class="card-columns" style="padding-left: 10px">
-            {% for project in projects %}
-                <div class="card mb-3"
-                     style="width: 100%; height: 10%; padding-left: 5px; padding-bottom: 5px; padding-top: 5px">
-
-                    <div class="row no-gutters">
-                        <div class="col-md-4">
-                            <img src="/media/default.png" class="rounded img-fluid" alt="No photo">
+<div class="main main-raised" style="margin-top: 8%">
+    <div style="padding-top: 2%">
+        <div class="container">
+            <div class="row">
+                <div class="col">
+                    <div class="row">
+                        <div class="col-5">
+                            <!img class="img-raised rounded-circle img-fluid"
+                                    {% if user.userprofile.image %} src="{{ user.userprofile.image.url }}" {% else %}
+                                 src="/media/default.png" {% endif %} alt="My Photo"> <!project picture here> <\!>
                         </div>
-                        <div class="col-md-8">
-                            <div class="card-body" align="right">
-                                <div class="description">
-                                    <h6>{{ project.title }}</h6>
-                                    <p>{{ project.type }}</p>
-                                    <p>{{ project.owner }}</p>
-                                    <div class="rating">
+                        <div class="col">
 
-                                    </div>
-                                    <a class="btn btn-primary" href="{% url 'accounts:project' id=project.id %}">View
-                                        Project</a>
-                                </div>
+                            <h1>{{ project.title }}</h1>
+                            <p><span class="badge badge-secondary">Rating 5/5, 46 votes</span></p>
+                            <p>{{ project.type }}</p>
+                            <div>
+                                <p>{{ project.owner }}</p>
+                                <p> {{ project.contact }}</p> <!owner contacts here> <\!>
                             </div>
+
+                            <h2 class="content-subhead">Description</h2>
+                            <p>
+                                {{ project.description }} <!project description here> <\!>
+                            </p>
                         </div>
                     </div>
                 </div>
-            {% endfor %}
+                <div class="col-2">
+                    {% if user.id == id %}
+                        <div class="my_project">
+                            <a class="btn btn-primary" href="{% url 'accounts:project_edit' %}">Edit Project</a> <!project picture here> <\!>
+                            <a class="btn btn-primary" href="#">Applications</a>
+                        </div>
+                    {% else %}
+                        <div class="other_project">
+                            <a class="btn btn-primary logged-in other_profile" href="#">Subscribe</a>
+                            <a class="btn btn-primary logged-in other_profile" href="#">Apply</a>
+                        </div>
+                    {% endif %}
+                </div>
 
+            </div>
+            <hr>
+            <div class="row">
+                <h2>Project History</h2>
+            </div>
+            <hr>
+            <div class="row">
+                <h2>Comments</h2>
+            </div>
         </div>
     </div>
 </div>
@@ -119,6 +148,5 @@
 <script async defer src="https://buttons.github.io/buttons.js"></script>
 <!-- Control Center for Material Kit: parallax effects, scripts for the example pages etc -->
 <script src="/static/material-kit-master/assets/js/material-kit.js?v=2.0.5" type="text/javascript"></script>
-
 </body>
 </html>
