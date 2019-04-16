@@ -122,27 +122,26 @@ def create_project(request):
 
 
 @login_required(login_url="/account/login")
-def edit_project(request):
+def edit_project(request, id):
+    project = get_object_or_404(ProjectPage, id=id)
     if request.method == 'POST':
         project_form = EditProjectForm(request.POST,
-                                       # request.FILES,
-                                       instance=request.project
+                                       instance=project
                                        )
         if project_form.is_valid():
             project_form.save()
-
-            return redirect('projects/projects_all.html')
+            return HttpResponseRedirect('/account/projects_catalog/')
         else:
             args = {
-                'p_form': project_form
+                'form': project_form
             }
-            return render(request, 'projects/project_edit.html', args)
+            return render(request, 'projects/edit.html', args)
     else:
-        project_form = EditProjectForm(instance=request.project)
+        project_form = EditProjectForm(instance=project)
         args = {
-            'project_form': project_form,
+            'form': project_form,
         }
-        return render(request, 'projects/project_edit.html', args)
+        return render(request, 'projects/edit.html', args)
 
 
 @login_required(login_url="/account/login")
