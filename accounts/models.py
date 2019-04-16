@@ -35,7 +35,7 @@ post_save.connect(create_profile, sender=User)
 
 
 def __str__(self):
-    return f'{self.user.username} UserProfile'
+    return '{self.user.username} UserProfile'
 
 
 def save(self):

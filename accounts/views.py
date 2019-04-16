@@ -5,7 +5,7 @@ from django.contrib.auth.models import User
 from django.http import HttpResponseRedirect
 from django.shortcuts import render, redirect, get_object_or_404
 
-from accounts.forms import RegistrationForm, EditProfileForm, ProfileUpdateForm, ProjectCreateForm
+from accounts.forms import RegistrationForm, EditProfileForm, ProfileUpdateForm, ProjectCreateForm, EditProjectForm
 from accounts.models import ProjectPage
 
 
@@ -36,7 +36,7 @@ def registration(request):
         return render(request, 'accounts/registration.html', args)
 
 
-@login_required(login_url="/account/login")
+#@login_required(login_url="/account/login")
 def profile(request, id=None):
     if id is None:
         return HttpResponseRedirect('/account/profile/%d/' % request.user.id)
@@ -118,7 +118,26 @@ def create_project(request):
 
 @login_required(login_url="/account/login")
 def edit_project(request):
-    pass
+    if request.method == 'POST':
+        project_form = EditProjectForm(request.POST,
+                                       # request.FILES,
+                                       instance=request.project
+                                       )
+        if project_form.is_valid():
+            project_form.save()
+
+            return redirect('projects/projects_all.html')
+        else:
+            args = {
+                'p_form': project_form
+            }
+            return render(request, 'projects/project_edit.html', args)
+    else:
+        project_form = EditProjectForm(instance=request.project)
+        args = {
+            'project_form': project_form,
+        }
+        return render(request, 'projects/project_edit.html', args)
 
 
 @login_required(login_url="/account/login")
