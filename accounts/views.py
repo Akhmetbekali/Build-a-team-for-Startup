@@ -93,11 +93,20 @@ def current_user(request):
     return render(request, 'accounts/profile.html', args)
 
 
-def projects(request):
+def projects_catalog(request):
     projects = ProjectPage.objects.all()
     return render(request, 'projects/projects_all.html', {
         'projects': projects,
     })
+
+
+def project_page(request, id=None):
+    # не знаю куда ссылаться если айдишка проекта не правильная
+    if id is None:
+        return HttpResponseRedirect('/account/profile/%d/' % request.user.id)
+    project = get_object_or_404(ProjectPage, id=id)
+    args = {'project': project}
+    return render(request, 'projects/project.html', args)
 
 
 @login_required(login_url="/account/login")
