@@ -41,7 +41,7 @@ def profile(request, id=None):
     if id is None:
         return HttpResponseRedirect('/account/profile/%d/' % request.user.id)
     user = get_object_or_404(User, id=id)
-    args = {'id': user.id, 'user': request.user}
+    args = {'user': user, 'current_user': request.user}
     return render(request, 'accounts/profile.html', args)
 
 
