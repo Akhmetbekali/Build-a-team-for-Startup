@@ -24,6 +24,8 @@ class ProjectPage(models.Model):
     type = models.CharField(max_length=20, default='project')
     title = models.CharField(max_length=30, default='New Project')
     description = models.CharField(max_length=500, default='')
+    #involved = models.CommaSeparatedIntegerField(max_length=200)
+    #participate = models.CommaSeparatedIntegerField(max_length=200)
 
 
 
