@@ -5,7 +5,7 @@ from django.contrib.auth.models import User
 from django.http import HttpResponseRedirect
 from django.shortcuts import render, redirect, get_object_or_404
 
-from accounts.forms import RegistrationForm, EditProfileForm, ProfileUpdateForm, ProjectCreateForm, EditProjectForm
+from accounts.forms import RegistrationForm, EditProfileForm, ProfileUpdateForm, ProjectCreateForm, EditProjectForm, DeleteProjectForm
 from accounts.models import ProjectPage
 
 
@@ -158,3 +158,19 @@ def change_password(request):
         form = PasswordChangeForm(user=request.user)
         args = {'form': form}
         return render(request, 'accounts/change_password.html', args)
+
+
+def delete_project(request, id):
+    project = get_object_or_404(ProjectPage, id=id)
+    project_form = DeleteProjectForm(request.POST,
+                                   instance=project
+                                   )
+    if project_form.is_valid():
+        project_form.delete()
+        return HttpResponseRedirect('/account/projects_catalog/')
+    else:
+        args = {
+            'form': project_form
+        }
+        return render(request, 'projects/delete.html', args)
+

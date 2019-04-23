@@ -86,3 +86,12 @@ class EditProjectForm(forms.ModelForm):
             'type',
             'description',
         )
+
+class DeleteProjectForm(forms.ModelForm):
+    class Meta:
+        model = ProjectPage
+        fields = (
+            'title',
+            'type',
+            'description',
+        )
