@@ -26,6 +26,7 @@ class ProjectPage(models.Model):
     description = models.CharField(max_length=500, default='')
 
 
+
 def create_profile(sender, **kwargs):
     if kwargs['created']:
         user_profile = UserProfile.objects.create(user=kwargs['instance'])
