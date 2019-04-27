@@ -12,6 +12,9 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css">
     <!-- Material Kit CSS -->
     <link href="/static/material-kit-master/assets/css/material-kit.css?v=2.0.5" rel="stylesheet"/>
+    <style>
+
+    </style>
 </head>
 <body>
 
@@ -63,26 +66,28 @@
 
 <div class="main main-raised">
     <div class="container" style="max-width: 100%">
-        <div class="card-columns" style="padding-left: 10px">
+        <div class="row">
             {% for project in projects %}
-                <div class="card mb-3"
-                     style="width: 100%; height: 10%; padding-left: 5px; padding-bottom: 5px; padding-top: 5px">
+                <div class="col-sm-4">
+                    <div class="card"
+                         style="padding-left: 5px; padding-bottom: 5px; padding-top: 5px">
 
-                    <div class="row no-gutters">
-                        <div class="col-md-4">
-                            <img src="/media/default_project.jpg" class="rounded img-fluid" alt="No photo">
-                        </div>
-                        <div class="col-md-8">
-                            <div class="card-body" align="right">
-                                <div class="description">
-                                    <h6>Title: {{ project.title }}</h6>
-                                    <p>Type: {{ project.type }}</p>
-                                    <p>Owner: {{ project.owner }}</p>
-                                    <div class="rating">
+                        <div class="row no-gutters">
+                            <div class="col-md-4">
+                                <img src="/media/default_project.jpg" class="rounded img-fluid" alt="No photo">
+                            </div>
+                            <div class="col-md-8">
+                                <div class="card-body" align="right">
+                                    <div class="description">
+                                        <h6>Title: {{ project.title }}</h6>
+                                        <p>Type: {{ project.type }}</p>
+                                        <p>Owner: {{ project.owner }}</p>
+                                        <div class="rating">
 
+                                        </div>
+                                        <a class="btn btn-primary" href="{% url 'accounts:project' id=project.id %}">View
+                                            Project</a>
                                     </div>
-                                    <a class="btn btn-primary" href="{% url 'accounts:project' id=project.id %}">View
-                                        Project</a>
                                 </div>
                             </div>
                         </div>
