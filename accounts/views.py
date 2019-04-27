@@ -130,7 +130,7 @@ def edit_project(request, id):
                                        )
         if project_form.is_valid():
             project_form.save()
-            return HttpResponseRedirect('/account/projects_catalog/')
+            return HttpResponseRedirect('/account/project/%s/' % id)
         else:
             args = {
                 'form': project_form
