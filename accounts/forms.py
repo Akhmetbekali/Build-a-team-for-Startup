@@ -30,7 +30,6 @@ class RegistrationForm(UserCreationForm):
 
 
 class EditProfileForm(forms.ModelForm):
-
     email = forms.EmailField(required=True)
     password = None
 
@@ -41,7 +40,6 @@ class EditProfileForm(forms.ModelForm):
             'last_name',
             'email'
         )
-
 
 
 class ProfileUpdateForm(forms.ModelForm):
@@ -79,15 +77,6 @@ class ProjectCreateForm(forms.ModelForm):
 
 
 class EditProjectForm(forms.ModelForm):
-    class Meta:
-        model = ProjectPage
-        fields = (
-            'title',
-            'type',
-            'description',
-        )
-
-class DeleteProjectForm(forms.ModelForm):
     class Meta:
         model = ProjectPage
         fields = (
