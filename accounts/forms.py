@@ -4,7 +4,6 @@ from django.contrib.auth.forms import UserCreationForm, UserChangeForm, ReadOnly
 from accounts import views
 from accounts.models import UserProfile, ProjectPage
 
-
 class RegistrationForm(UserCreationForm):
     email = forms.EmailField(required=True)
 
@@ -29,9 +28,11 @@ class RegistrationForm(UserCreationForm):
             user.save()
 
 
+
 class EditProfileForm(forms.ModelForm):
     email = forms.EmailField(required=True)
     password = None
+
 
     class Meta:
         model = User
@@ -50,6 +51,27 @@ class ProfileUpdateForm(forms.ModelForm):
             'speciality',
             'description'
         )
+
+
+# class ProjectSelectionForm(forms.ModelForm):
+#      class Meta:
+#          model = User
+#
+#
+#     def __init__(self, *args, **kwargs):
+#         super(UserProfile, self).__init__(*args, **kwargs)
+#         self.fields['projects'].widget = forms.widgets.CheckboxSelectMultiple()
+#         self.fields['projects'].queryset = User.objects.all()
+
+
+class SectionExtractionForm(forms.ModelForm):
+
+
+    users = forms.ModelMultipleChoiceField(widget=forms.CheckboxSelectMultiple(attrs={'user' : 'user'}), queryset=User.objects.all())
+    class Meta:
+        model = ProjectPage
+        fields = '__all__'
+
 
 
 class ProjectCreateForm(forms.ModelForm):
@@ -77,10 +99,12 @@ class ProjectCreateForm(forms.ModelForm):
 
 
 class EditProjectForm(forms.ModelForm):
+
     class Meta:
         model = ProjectPage
         fields = (
             'title',
             'type',
             'description',
+
         )

@@ -7,6 +7,21 @@ from django.db.models.signals import post_save
 # Create your models here.
 
 
+
+
+
+
+class ProjectPage(models.Model):
+    owner = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, related_name='creater')
+    # image = models.ImageField()
+    type = models.CharField(max_length=20, default='project')
+    title = models.CharField(max_length=30, default='New Project')
+    description = models.CharField(max_length=500, default='')
+    users = models.ManyToManyField(User, blank=True)
+
+
+
+
 class UserProfile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     image = models.ImageField(default='default.png', upload_to='profile_pics')
@@ -15,17 +30,9 @@ class UserProfile(models.Model):
     speciality = models.CharField(max_length=20, default='')
     description = models.CharField(max_length=100, default='')
     image = models.ImageField(upload_to='profile_image', blank=True)
+    projects = models.ManyToManyField(ProjectPage, blank=True)
 
 
-class ProjectPage(models.Model):
-    owner = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
-    # image = models.ImageField()
-
-    type = models.CharField(max_length=20, default='project')
-    title = models.CharField(max_length=30, default='New Project')
-    description = models.CharField(max_length=500, default='')
-    #involved = models.CommaSeparatedIntegerField(max_length=200)
-    #participate = models.CommaSeparatedIntegerField(max_length=200)
 
 
 

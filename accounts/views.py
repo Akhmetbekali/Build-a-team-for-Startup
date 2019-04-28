@@ -121,6 +121,8 @@ def create_project(request):
         return render(request, 'projects/create.html', args)
 
 
+
+
 @login_required(login_url="/account/login")
 def edit_project(request, id):
     project = get_object_or_404(ProjectPage, id=id)
@@ -166,3 +168,4 @@ def delete_project(request, id):
     project = get_object_or_404(ProjectPage, id=id)
     project.delete()
     return HttpResponseRedirect('/account/projects_catalog/')
+
