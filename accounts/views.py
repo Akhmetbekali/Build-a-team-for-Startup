@@ -5,8 +5,8 @@ from django.contrib.auth.models import User
 from django.http import HttpResponseRedirect
 from django.shortcuts import render, redirect, get_object_or_404
 
-from accounts.forms import RegistrationForm, EditProfileForm, ProfileUpdateForm, ProjectCreateForm, EditProjectForm
-from accounts.models import ProjectPage
+from accounts.forms import RegistrationForm, EditProfileForm, ProfileUpdateForm, ProjectCreateForm, EditProjectForm, AddCommentForm
+from accounts.models import ProjectPage, UserProfile
 
 
 # Create your views here.
@@ -166,3 +166,43 @@ def delete_project(request, id):
     project = get_object_or_404(ProjectPage, id=id)
     project.delete()
     return HttpResponseRedirect('/account/projects_catalog/')
+
+
+@login_required(login_url="/account/login")
+def add_comment_to_user(request, id):
+    profile = get_object_or_404(UserProfile, id=id)
+    if request.method == 'POST':
+        form = AddCommentForm(request.POST, author=request.user, user_profile=profile)
+        if form.is_valid():
+            form.save()
+            # TODO: хз куда редиректить
+            return redirect('')
+        else:
+            args = {'form': form}
+            # TODO:
+            return render(request, '', args)
+    else:
+        form = AddCommentForm()
+        args = {'form': form}
+        # TODO:
+        return render(request, '', args)
+
+
+@login_required(login_url="/account/login")
+def add_comment_to_project(request, id):
+    project = get_object_or_404(ProjectPage, id=id)
+    if request.method == 'POST':
+        form = AddCommentForm(request.POST, author=request.user, project=project)
+        if form.is_valid():
+            form.save()
+            # TODO: хз куда редиректить
+            return redirect('')
+        else:
+            args = {'form': form}
+            # TODO:
+            return render(request, '', args)
+    else:
+        form = AddCommentForm()
+        args = {'form': form}
+        # TODO:
+        return render(request, '', args)

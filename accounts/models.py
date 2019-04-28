@@ -28,6 +28,15 @@ class ProjectPage(models.Model):
     #participate = models.CommaSeparatedIntegerField(max_length=200)
 
 
+class Comment(models.Model):
+    author = models.ForeignKey(User, on_delete=models.CASCADE)
+
+    project = models.ForeignKey('ProjectPage', on_delete=models.CASCADE, null=True)
+    user_profile = models.ForeignKey('UserProfile', on_delete=models.CASCADE, null=True)
+
+    text = models.TextField()
+    creation = models.DateTimeField(auto_now=True)
+
 
 def create_profile(sender, **kwargs):
     if kwargs['created']:
@@ -38,7 +47,7 @@ post_save.connect(create_profile, sender=User)
 
 
 def __str__(self):
-    return '{self.user.username} UserProfile'
+    return f'{self.user.username} UserProfile'
 
 
 def save(self):

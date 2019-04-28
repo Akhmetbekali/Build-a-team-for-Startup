@@ -1,7 +1,7 @@
 from django import forms
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm, UserChangeForm, ReadOnlyPasswordHashField
-from accounts.models import UserProfile, ProjectPage
+from accounts.models import UserProfile, ProjectPage, Comment
 
 
 class RegistrationForm(UserCreationForm):
@@ -83,3 +83,28 @@ class EditProjectForm(forms.ModelForm):
             'type',
             'description',
         )
+
+
+class AddCommentForm(forms.ModelForm):
+    class Meta:
+        model = Comment
+        fields = (
+            'text',
+        )
+
+    def save(self, commit=True):
+        comment = super(AddCommentForm, self).save(commit=False)
+        comment.author = self.author
+        comment.text = self.cleaned_data['text']
+
+        comment.project = self.project
+        comment.user_profile = self.user_profile
+
+        if commit:
+            comment.save()
+
+    def __init__(self, *args, **kwargs):
+        self.author = kwargs.pop('author', None)
+        self.project = kwargs.pop('project', None)
+        self.user_profile = kwargs.pop('user_profile', None)
+        super(AddCommentForm, self).__init__(*args, **kwargs)
