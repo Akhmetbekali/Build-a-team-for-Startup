@@ -7,22 +7,6 @@ from django.db.models.signals import post_save
 # Create your models here.
 
 
-
-
-
-
-class ProjectPage(models.Model):
-    owner = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, related_name='creater')
-    # image = models.ImageField()
-    type = models.CharField(max_length=20, default='project')
-    title = models.CharField(max_length=30, default='New Project')
-    description = models.CharField(max_length=500, default='')
-    users = models.ManyToManyField(User, blank=True, related_name="users")
-    participate = models.ManyToManyField(User, blank=True, related_name="participate")
-
-
-
-
 class UserProfile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     image = models.ImageField(default='default.png', upload_to='profile_pics')
@@ -33,8 +17,8 @@ class UserProfile(models.Model):
     image = models.ImageField(upload_to='profile_image', blank=True)
     projects = models.ManyToManyField(ProjectPage, blank=True)
 
-
-
+    def __str__(self):
+        return f'{self.user.username} UserProfile'
 
 
 def create_profile(sender, **kwargs):
@@ -45,8 +29,24 @@ def create_profile(sender, **kwargs):
 post_save.connect(create_profile, sender=User)
 
 
-def __str__(self):
-    return '{self.user.username} UserProfile'
+class ProjectPage(models.Model):
+    owner = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, related_name='creater')
+    image = models.ImageField(default='default_project.jpg', upload_to='project_pics')
+    type = models.CharField(max_length=20, default='project')
+    title = models.CharField(max_length=30, default='New Project')
+    description = models.CharField(max_length=500, default='')
+    users = models.ManyToManyField(User, blank=True, related_name="users")
+    participate = models.ManyToManyField(User, blank=True, related_name="participate")
+
+
+class Comment(models.Model):
+    author = models.ForeignKey(User, on_delete=models.CASCADE)
+
+    project = models.ForeignKey('ProjectPage', on_delete=models.CASCADE, null=True)
+    user_profile = models.ForeignKey('UserProfile', on_delete=models.CASCADE, null=True)
+
+    text = models.TextField()
+    creation = models.DateTimeField(auto_now=True)
 
 
 def save(self):

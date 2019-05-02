@@ -1,6 +1,6 @@
 from django.contrib import admin
-from accounts.models import UserProfile, ProjectPage
-# Register your models here.
+from accounts.models import *
 
 admin.site.register(UserProfile)
 admin.site.register(ProjectPage)
+admin.site.register(Comment)

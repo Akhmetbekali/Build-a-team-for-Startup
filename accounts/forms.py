@@ -1,8 +1,9 @@
 from django import forms
+from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
-from django.contrib.auth.forms import UserCreationForm, UserChangeForm, ReadOnlyPasswordHashField
-from accounts import views
-from accounts.models import UserProfile, ProjectPage
+
+from accounts.models import UserProfile, ProjectPage, Comment
+
 
 class RegistrationForm(UserCreationForm):
     email = forms.EmailField(required=True)
@@ -28,11 +29,9 @@ class RegistrationForm(UserCreationForm):
             user.save()
 
 
-
 class EditProfileForm(forms.ModelForm):
     email = forms.EmailField(required=True)
     password = None
-
 
     class Meta:
         model = User
@@ -53,25 +52,13 @@ class ProfileUpdateForm(forms.ModelForm):
         )
 
 
-# class ProjectSelectionForm(forms.ModelForm):
-#      class Meta:
-#          model = User
-#
-#
-#     def __init__(self, *args, **kwargs):
-#         super(UserProfile, self).__init__(*args, **kwargs)
-#         self.fields['projects'].widget = forms.widgets.CheckboxSelectMultiple()
-#         self.fields['projects'].queryset = User.objects.all()
-
-
 class SectionExtractionForm(forms.ModelForm):
+    users = forms.ModelMultipleChoiceField(widget=forms.CheckboxSelectMultiple(attrs={'user': 'user'}),
+                                           queryset=User.objects.all())
 
-
-    users = forms.ModelMultipleChoiceField(widget=forms.CheckboxSelectMultiple(attrs={'user' : 'user'}), queryset=User.objects.all())
     class Meta:
         model = ProjectPage
         fields = '__all__'
-
 
 
 class ProjectCreateForm(forms.ModelForm):
@@ -99,12 +86,39 @@ class ProjectCreateForm(forms.ModelForm):
 
 
 class EditProjectForm(forms.ModelForm):
-
     class Meta:
         model = ProjectPage
         fields = (
             'title',
             'type',
             'description',
-
+            'image'
         )
+
+
+class AddCommentForm(forms.ModelForm):
+    class Meta:
+        model = Comment
+        fields = (
+            'text',
+        )
+        widgets = {
+            'text': forms.Textarea(attrs={'class': 'form-control'}),
+        }
+
+    def save(self, commit=True):
+        comment = super(AddCommentForm, self).save(commit=False)
+        comment.author = self.author
+        comment.text = self.cleaned_data['text']
+
+        comment.project = self.project
+        comment.user_profile = self.user_profile
+
+        if commit:
+            comment.save()
+
+    def __init__(self, *args, **kwargs):
+        self.author = kwargs.pop('author', None)
+        self.project = kwargs.pop('project', None)
+        self.user_profile = kwargs.pop('user_profile', None)
+        super(AddCommentForm, self).__init__(*args, **kwargs)
