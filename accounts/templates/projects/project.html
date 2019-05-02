@@ -75,7 +75,9 @@
                 <div class="col">
                     <div class="row">
                         <div class="col-5">
-                            <img class="img-raised rounded-circle img-fluid" src="/media/default_project.jpg"  alt="My Photo">
+                            <img class="img-raised rounded-circle img-fluid"
+                                    {% if project.image %} src="{{ project.image.url }}" {% else %}
+                                 src="/media/default_project.jpg" {% endif %} alt="My Photo">
                         </div>
                         <div class="col">
 

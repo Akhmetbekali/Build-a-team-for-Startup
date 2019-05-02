@@ -16,10 +16,21 @@ class UserProfile(models.Model):
     description = models.CharField(max_length=100, default='')
     image = models.ImageField(upload_to='profile_image', blank=True)
 
+    def __str__(self):
+        return f'{self.user.username} UserProfile'
+
+
+def create_profile(sender, **kwargs):
+    if kwargs['created']:
+        user_profile = UserProfile.objects.create(user=kwargs['instance'])
+
+
+post_save.connect(create_profile, sender=User)
+
 
 class ProjectPage(models.Model):
     owner = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
-    # image = models.ImageField()
+    image = models.ImageField(default='default_project.jpg', upload_to='project_pics')
 
     type = models.CharField(max_length=20, default='project')
     title = models.CharField(max_length=30, default='New Project')
@@ -36,18 +47,6 @@ class Comment(models.Model):
 
     text = models.TextField()
     creation = models.DateTimeField(auto_now=True)
-
-
-def create_profile(sender, **kwargs):
-    if kwargs['created']:
-        user_profile = UserProfile.objects.create(user=kwargs['instance'])
-
-
-post_save.connect(create_profile, sender=User)
-
-
-def __str__(self):
-    return f'{self.user.username} UserProfile'
 
 
 def save(self):
