@@ -82,6 +82,7 @@ class EditProjectForm(forms.ModelForm):
             'title',
             'type',
             'description',
+            'image'
         )
 
 

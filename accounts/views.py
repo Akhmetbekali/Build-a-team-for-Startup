@@ -94,8 +94,10 @@ def current_user(request):
 
 def projects_catalog(request):
     projects = ProjectPage.objects.all()
+    user = request.user
     return render(request, 'projects/projects_all.html', {
-        'projects': projects,
+        'user': user,
+        'projects': projects
     })
 
 
@@ -126,6 +128,7 @@ def edit_project(request, id):
     project = get_object_or_404(ProjectPage, id=id)
     if request.method == 'POST':
         project_form = EditProjectForm(request.POST,
+                                       request.FILES,
                                        instance=project
                                        )
         if project_form.is_valid():
