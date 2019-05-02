@@ -49,7 +49,12 @@ def profile(request, id=None):
         commentForm = AddCommentForm(request.POST, author=request.user, user_profile=user_profile)
         if commentForm.is_valid():
             commentForm.save()
-            return render(request, 'accounts/profile.html')
+            args = {
+                'user': user,
+                'current_user': request.user,
+                'comments': comments
+            }
+            return render(request, 'accounts/profile.html', args)
         else:
             args['commentForm'] = commentForm
             return render(request, 'accounts/profile.html', args)
@@ -118,8 +123,24 @@ def projects_catalog(request):
 
 def project_page(request, id):
     project = get_object_or_404(ProjectPage, id=id)
-    args = {'project': project, 'current_user': request.user}
-    return render(request, 'projects/project.html', args)
+    comments = Comment.objects.filter(project=project)
+    args = {
+        'project': project,
+        'current_user': request.user,
+        'comments': comments
+    }
+    if request.method == 'POST':
+        commentForm = AddCommentForm(request.POST, author=request.user, project=project)
+        if commentForm.is_valid():
+            commentForm.save()
+            return redirect('projects/project.html')
+        else:
+            args['commentForm'] = commentForm
+            return render(request, 'projects/project.html', args)
+    else:
+        commentForm = AddCommentForm(author=request.user, project=project)
+        args['commentForm'] = commentForm
+        return render(request, 'projects/project.html', args)
 
 
 @login_required(login_url="/account/login")
@@ -184,26 +205,6 @@ def delete_project(request, id):
     project = get_object_or_404(ProjectPage, id=id)
     project.delete()
     return HttpResponseRedirect('/account/projects_catalog/')
-
-
-@login_required(login_url="/account/login")
-def add_comment_to_project(request, id):
-    project = get_object_or_404(ProjectPage, id=id)
-    if request.method == 'POST':
-        form = AddCommentForm(request.POST, author=request.user, project=project)
-        if form.is_valid():
-            form.save()
-            # TODO: хз куда редиректить
-            return redirect('')
-        else:
-            args = {'form': form}
-            # TODO:
-            return render(request, '', args)
-    else:
-        form = AddCommentForm()
-        args = {'form': form}
-        # TODO:
-        return render(request, '', args)
 
 
 def search(request):

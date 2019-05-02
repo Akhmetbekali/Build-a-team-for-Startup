@@ -85,7 +85,8 @@
                             <p><span class="badge badge-secondary">Rating 5/5, 46 votes</span></p>
                             <p>Type: {{ project.type }}</p>
                             <div>
-                                Owner:  <a href="{% url 'accounts:profile_with_id' id=project.owner.id %}" class="stretched-link font-weight-bold">{{ project.owner }}</a>
+                                Owner: <a href="{% url 'accounts:profile_with_id' id=project.owner.id %}"
+                                          class="stretched-link font-weight-bold">{{ project.owner }}</a>
                             </div>
 
                             <h2 class="content-subhead">Description</h2>
@@ -98,7 +99,8 @@
                 <div class="col-2">
                     {% if current_user.id == project.owner.id %}
                         <div class="my_project">
-                            <a class="btn btn-primary" href="{% url 'accounts:project_edit' id=project.id%}">Edit Project</a>
+                            <a class="btn btn-primary" href="{% url 'accounts:project_edit' id=project.id %}">Edit
+                                Project</a>
                             <a class="btn btn-primary" href="#">Applications</a>
                         </div>
                     {% else %}
@@ -112,15 +114,76 @@
             </div>
             <hr>
             <div class="row">
-                <h2>Project History</h2>
-            </div>
-            <hr>
-            <div class="row">
                 <h2>Comments</h2>
+            </div>
+            <div class="row">
+                {% for comment in comments %}
+                    <div class="col-sm-4">
+                        <div class="card">
+                            <div class="row no-gutters">
+                                <div class="col-md-4">
+                                    <img {% if comment.user_profile.image %}
+                                        src="{{ comment.user_profile.image.url }}" {% else %}
+                                        src="/media/default.png" {% endif %}
+                                        class="rounded img-fluid" alt="No photo">
+                                </div>
+                                <div class="col-md-8">
+                                    <div class="card-body" align="right">
+                                        <div class="description">
+                                            <h6><a href="{% url 'accounts:profile_with_id' id=comment.author.id %}"
+                                                   class="stretched-link font-weight-bold">{{ comment.author.first_name }} {{ comment.author.last_name }}</a>
+                                            </h6>
+                                            <p>{{ comment.text }}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+            <div class="row" style="padding-bottom: 2%">
+                {% if current_user != project.owner %}
+                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#commentModal">Write
+                        comment
+                    </button>
+                {% endif %}
             </div>
         </div>
     </div>
 </div>
+
+<!-- Modal -->
+{% if current_user != project.owner  %}
+    <div class="modal fade" id="commentModal" tabindex="-1" role="dialog" aria-labelledby="commentModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <form class="form" method="post">
+                    {% csrf_token %}
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Write your comment</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        {% for field in commentForm %}
+                            <div class="form-group bmd-form-group">
+                                <label class="bmd-label-floating">Comment</label>
+                                {{ field }}
+                            </div>
+                        {% endfor %}
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                        <button type="submit" class="btn btn-primary">Comment</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+{% endif %}
 
 <footer class="footer footer-default">
     <div class="container">
