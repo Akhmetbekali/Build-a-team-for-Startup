@@ -218,3 +218,17 @@ def add_comment_to_project(request, id):
         args = {'form': form}
         # TODO:
         return render(request, '', args)
+
+
+def search(request):
+    # Search by type of the project
+    # Instead of 'lab' we need to get users input
+    type = ProjectPage.objects.filter(type__contains='lab')
+
+    # Search by keyword in description
+    # Instead of '12' we need to get users input
+    description = ProjectPage.objects.filter(description__contains='12')
+    return render(request, 'projects/test.html', {
+        'type': type,
+        'keyword': description
+    })

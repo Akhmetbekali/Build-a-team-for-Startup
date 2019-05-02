@@ -33,4 +33,6 @@ urlpatterns = [
     url(r'^projects/create$', views.create_project, name='project_create'),
     url(r'^project/(?P<id>\d+)/edit$', views.edit_project, name='project_edit'),
     url(r'^project/(?P<id>\d+)/delete', views.delete_project, name='project_delete'),
+
+    url(r'^search/?$', views.search, name='search'),
 ]
