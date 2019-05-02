@@ -39,7 +39,7 @@ def profile(request, id=None):
         return HttpResponseRedirect('/account/profile/%d/' % request.user.id)
     user = get_object_or_404(User, id=id)
     user_profile = get_object_or_404(UserProfile, user=user)
-    comments = Comment.objects.filter(user_profile=user.id)
+    comments = Comment.objects.filter(user_profile=user_profile)
     args = {
         'user': user,
         'current_user': request.user,
@@ -49,7 +49,7 @@ def profile(request, id=None):
         commentForm = AddCommentForm(request.POST, author=request.user, user_profile=user_profile)
         if commentForm.is_valid():
             commentForm.save()
-            return render(request, 'accounts/profile.html', args)
+            return render(request, 'accounts/profile.html')
         else:
             args['commentForm'] = commentForm
             return render(request, 'accounts/profile.html', args)
@@ -184,20 +184,6 @@ def delete_project(request, id):
     project = get_object_or_404(ProjectPage, id=id)
     project.delete()
     return HttpResponseRedirect('/account/projects_catalog/')
-
-
-@login_required(login_url="/account/login")
-def add_comment_to_user(request, id):
-    user_profile = get_object_or_404(UserProfile, id=id)
-    if request.method == 'POST':
-        form = AddCommentForm(request.POST, author=request.user, user_profile=user_profile)
-        if form.is_valid():
-            form.save()
-            return HttpResponseRedirect('/account/project/%s/' % id)
-        else:
-            return HttpResponseRedirect('/account/project/%s/' % id)
-    else:
-        return HttpResponseRedirect('/account/project/%s/' % id)
 
 
 @login_required(login_url="/account/login")

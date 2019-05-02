@@ -21,7 +21,6 @@ urlpatterns = [
 
     url(r'^profile/$', views.profile, name='profile'),
     url(r'^profile/(?P<id>\d+)/$', views.profile, name='profile_with_id'),
-    url(r'^profile/(?P<id>\d+)/comments/add$', views.add_comment_to_user, name='add_comment_to_user'),
 
     url(r'^profile/edit$', views.edit_profile, name='profile_edit'),
     url(r'^catalog/$', views.catalog, name='profiles_catalog'),
