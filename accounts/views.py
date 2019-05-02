@@ -133,7 +133,12 @@ def project_page(request, id):
         commentForm = AddCommentForm(request.POST, author=request.user, project=project)
         if commentForm.is_valid():
             commentForm.save()
-            return redirect('projects/project.html')
+            args = {
+                'project': project,
+                'current_user': request.user,
+                'comments': comments
+            }
+            return render(request, 'projects/project.html', args)
         else:
             args['commentForm'] = commentForm
             return render(request, 'projects/project.html', args)
