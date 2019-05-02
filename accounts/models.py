@@ -35,8 +35,8 @@ class ProjectPage(models.Model):
     type = models.CharField(max_length=20, default='project')
     title = models.CharField(max_length=30, default='New Project')
     description = models.CharField(max_length=500, default='')
-    users = models.ManyToManyField(User, blank=True, related_name="users")
-    participate = models.ManyToManyField(User, blank=True, related_name="participate")
+    waiting_list = models.ManyToManyField(User, blank=True, related_name="users")
+    participants = models.ManyToManyField(User, blank=True, related_name="participate")
 
 
 class Comment(models.Model):

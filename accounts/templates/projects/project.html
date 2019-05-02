@@ -108,7 +108,7 @@
                     {% else %}
                         <div class="other_project">
                             <a class="btn btn-primary logged-in other_profile" href="#">Subscribe</a>
-                            <a class="btn btn-primary logged-in other_profile" href="#">Apply</a>
+                            <a class="btn btn-primary logged-in other_profile" href="{% url 'accounts:project_applying' id=project.id %}">Apply</a>
                         </div>
                     {% endif %}
                 </div>

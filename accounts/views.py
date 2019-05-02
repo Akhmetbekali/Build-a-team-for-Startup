@@ -214,3 +214,11 @@ def search(request):
         'type': type,
         'keyword': description
     })
+
+
+@login_required(login_url="/account/login")
+def applying_to_project(request, id):
+    project = get_object_or_404(ProjectPage, id=id)
+    project.waiting_list.add(request.user)
+    project.save()
+    return redirect('accounts:project', id=id)
