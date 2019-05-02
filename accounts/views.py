@@ -49,12 +49,7 @@ def profile(request, id=None):
         commentForm = AddCommentForm(request.POST, author=request.user, user_profile=user_profile)
         if commentForm.is_valid():
             commentForm.save()
-            args = {
-                'user': user,
-                'current_user': request.user,
-                'comments': comments
-            }
-            return render(request, 'accounts/profile.html', args)
+            return redirect('accounts:profile_with_id', id=id)
         else:
             args['commentForm'] = commentForm
             return render(request, 'accounts/profile.html', args)
@@ -133,12 +128,7 @@ def project_page(request, id):
         commentForm = AddCommentForm(request.POST, author=request.user, project=project)
         if commentForm.is_valid():
             commentForm.save()
-            args = {
-                'project': project,
-                'current_user': request.user,
-                'comments': comments
-            }
-            return render(request, 'projects/project.html', args)
+            return redirect('accounts:project', id=id)
         else:
             args['commentForm'] = commentForm
             return render(request, 'projects/project.html', args)
