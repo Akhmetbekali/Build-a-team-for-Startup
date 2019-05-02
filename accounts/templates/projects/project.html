@@ -82,6 +82,8 @@
                             <h1>{{ project.title }}</h1>
                             <p><span class="badge badge-secondary">Rating 5/5, 46 votes</span></p>
                             <p>Type: {{ project.type }}</p>
+                            <p>Involved: {{ project.users.first }}</p>
+                            <p>Waiting list: {{ project.participate.first }}</p>
                             <div>
                                 Owner:  <a href="{% url 'accounts:profile_with_id' id=project.owner.id %}" class="stretched-link font-weight-bold">{{ project.owner }}</a>
                             </div>
