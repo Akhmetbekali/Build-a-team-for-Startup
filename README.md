@@ -39,6 +39,37 @@ python -m smtpd -n -c DebuggingServer localhost:1025
 ```
 Then after writing your email to corresponding field letter will come to this server
 
+
+## Source Code Analyzing
+
+Firstly, run [SonarQube](https://www.sonarqube.org/downloads/) from its bin directory
+
+For Linux/MacOS:
+```bash
+./sonar.sh start
+```
+
+For Windows:
+```bash
+./StartSonar.bat
+```
+
+Then, run [SonarQube Scanner](https://docs.sonarqube.org/display/SCAN/Analyzing+with+SonarQube+Scanner) in the root directory of the project
+
+For Linux/MacOS:
+```bash
+<path to sonar-scanner bin>/sonar-scanner
+```
+
+For Windows:
+```bash
+<path to sonar-scanner bin>/sonar-scanner.bat
+```
+
+After that, open this link in browser:
+
+http://localhost:9000/dashboard?id=Build-a-team-for-Startup
+
 ## Built With
 
 * [Django](https://docs.djangoproject.com/en/2.1/) - The web framework used
