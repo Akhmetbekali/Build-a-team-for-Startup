@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+{% for project in keyword %}
+    <h6>Title: {{ project.title }}</h6>
+    <p>Type: {{ project.type }}</p>
+    <p>Description: {{ project.description }}</p>
+
+{% endfor %}
+</body>
+</html>
