@@ -5,11 +5,9 @@ from django.contrib.auth.models import User
 from django.http import HttpResponseRedirect
 from django.shortcuts import render, redirect, get_object_or_404
 
-from accounts.forms import RegistrationForm, EditProfileForm, ProfileUpdateForm, ProjectCreateForm, EditProjectForm, AddCommentForm
-from accounts.models import ProjectPage, UserProfile
-
-
-# Create your views here.
+from accounts.forms import RegistrationForm, EditProfileForm, ProfileUpdateForm, ProjectCreateForm, EditProjectForm, \
+    AddCommentForm
+from accounts.models import ProjectPage, UserProfile, Comment
 
 
 def home(request):
@@ -40,8 +38,25 @@ def profile(request, id=None):
     if id is None:
         return HttpResponseRedirect('/account/profile/%d/' % request.user.id)
     user = get_object_or_404(User, id=id)
-    args = {'user': user, 'current_user': request.user}
-    return render(request, 'accounts/profile.html', args)
+    user_profile = get_object_or_404(UserProfile, user=user)
+    comments = Comment.objects.filter(user_profile=user.id)
+    args = {
+        'user': user,
+        'current_user': request.user,
+        'comments': comments
+    }
+    if request.method == 'POST':
+        commentForm = AddCommentForm(request.POST, author=request.user, user_profile=user_profile)
+        if commentForm.is_valid():
+            commentForm.save()
+            return render(request, 'accounts/profile.html', args)
+        else:
+            args['commentForm'] = commentForm
+            return render(request, 'accounts/profile.html', args)
+    else:
+        commentForm = AddCommentForm(author=request.user, user_profile=user_profile)
+        args['commentForm'] = commentForm
+        return render(request, 'accounts/profile.html', args)
 
 
 @login_required(login_url="/account/login")
@@ -173,22 +188,16 @@ def delete_project(request, id):
 
 @login_required(login_url="/account/login")
 def add_comment_to_user(request, id):
-    profile = get_object_or_404(UserProfile, id=id)
+    user_profile = get_object_or_404(UserProfile, id=id)
     if request.method == 'POST':
-        form = AddCommentForm(request.POST, author=request.user, user_profile=profile)
+        form = AddCommentForm(request.POST, author=request.user, user_profile=user_profile)
         if form.is_valid():
             form.save()
-            # TODO: хз куда редиректить
-            return redirect('')
+            return HttpResponseRedirect('/account/project/%s/' % id)
         else:
-            args = {'form': form}
-            # TODO:
-            return render(request, '', args)
+            return HttpResponseRedirect('/account/project/%s/' % id)
     else:
-        form = AddCommentForm()
-        args = {'form': form}
-        # TODO:
-        return render(request, '', args)
+        return HttpResponseRedirect('/account/project/%s/' % id)
 
 
 @login_required(login_url="/account/login")

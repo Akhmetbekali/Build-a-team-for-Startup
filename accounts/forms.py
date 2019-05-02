@@ -1,6 +1,7 @@
 from django import forms
+from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
-from django.contrib.auth.forms import UserCreationForm, UserChangeForm, ReadOnlyPasswordHashField
+
 from accounts.models import UserProfile, ProjectPage, Comment
 
 
@@ -92,6 +93,9 @@ class AddCommentForm(forms.ModelForm):
         fields = (
             'text',
         )
+        widgets = {
+            'text': forms.Textarea(attrs={'class': 'form-control'}),
+        }
 
     def save(self, commit=True):
         comment = super(AddCommentForm, self).save(commit=False)
