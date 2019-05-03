@@ -126,9 +126,12 @@ def project_page(request, id):
     }
     if request.method == 'POST':
         answer = request.POST.get('dropdown', False)
+        answer2 = request.POST.get('dropdown2', False)
         if answer:
             project.waiting_list.remove(answer)
             project.participants.add(answer)
+        if answer2:
+            project.participants.remove(answer2)
         commentForm = AddCommentForm(request.POST, author=request.user, project=project)
         if commentForm.is_valid():
             commentForm.save()
