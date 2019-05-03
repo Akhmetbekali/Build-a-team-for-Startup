@@ -227,7 +227,7 @@ def search_form(request):
 def search(request):
     if 'q' in request.GET and request.GET['q']:
         q = request.GET['q']
-        filter = ProjectPage.objects.filter(Q(description__contains=q) | Q(type__contains=q))
+        filter = ProjectPage.objects.filter(Q(description__contains=q) | Q(type__contains=q) | Q(title__contains=q))
         args = {'filter': filter, 'query': q}
         print(len(filter))
         return render(request, 'projects/results.html', args)
