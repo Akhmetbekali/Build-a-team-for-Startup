@@ -121,21 +121,15 @@
                     <div class="col-sm-4">
                         <div class="card">
                             <div class="row no-gutters">
-                                <div class="col-md-4">
-                                    <img {% if comment.user_profile.image %}
-                                        src="{{ comment.user_profile.image.url }}" {% else %}
-                                        src="/media/default.png" {% endif %}
-                                        class="rounded img-fluid" alt="No photo">
-                                </div>
-                                <div class="col-md-8">
-                                    <div class="card-body" align="right">
-                                        <div class="description">
-                                            <h6><a href="{% url 'accounts:profile_with_id' id=comment.author.id %}"
-                                                   class="stretched-link font-weight-bold">{{ comment.author.first_name }} {{ comment.author.last_name }}</a>
-                                            </h6>
-                                            <p>{{ comment.text }}</p>
-                                        </div>
+
+                                <div class="card-body">
+                                    <div class="description">
+                                        <h6><a href="{% url 'accounts:profile_with_id' id=comment.author.id %}"
+                                               class="stretched-link font-weight-bold">{{ comment.author.first_name }} {{ comment.author.last_name }}</a>
+                                        </h6>
+                                        <p>{{ comment.text }}</p>
                                     </div>
+
                                 </div>
                             </div>
                         </div>

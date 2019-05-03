@@ -101,37 +101,42 @@
                 <div class="col-2">
                     {% if current_user.id == project.owner.id %}
                         <div class="my_project">
-                            <a class="btn btn-primary" href="{% url 'accounts:project_edit' id=project.id%}">Edit Project</a>
+                            <a class="btn btn-primary" href="{% url 'accounts:project_edit' id=project.id %}">Edit
+                                Project</a>
                             <a class="btn btn-primary" href="#">Applications</a>
                             <form class="form" method="post" enctype="multipart/form-data">
                                 {% csrf_token %}
                                 <label>
                                     <select name="dropdown">
                                         {% for user in project.waiting_list.all %}
-                                            <option value ="{{ user.id }}">{{ user.first_name }}</option>
+                                            <option value="{{ user.id }}">{{ user.first_name }}</option>
                                         {% endfor %}
                                     </select>
                                 </label>
                                 <button type="submit" class="btn btn-primary logged-in other_profile">Add</button>
                             </form>
 
-                        <form class="form" method="post" enctype="multipart/form-data">
+                            <form class="form" method="post" enctype="multipart/form-data">
                                 {% csrf_token %}
                                 <label>
                                     <select name="dropdown2">
                                         {% for user in project.participants.all %}
-                                            <option value ="{{ user.id }}">{{ user.first_name }}</option>
+                                            <option value="{{ user.id }}">{{ user.first_name }}</option>
                                         {% endfor %}
                                     </select>
                                 </label>
-                                <button type="submit" class="btn btn-primary logged-in other_profile">Delete From Project</button>
+                                <button type="submit" class="btn btn-primary logged-in other_profile">Delete From
+                                    Project
+                                </button>
                             </form>
                         </div>
                     {% else %}
                         <div class="other_project">
                             <a class="btn btn-primary logged-in other_profile" href="#">Subscribe</a>
-                            <a class="btn btn-primary logged-in other_profile" href="{% url 'accounts:project_applying' id=project.id%}">Apply</a>
-                            <a class="btn btn-primary logged-in other_profile" href="{% url 'accounts:removefromparticipate' id=project.id%}">Delete1</a>
+                            <a class="btn btn-primary logged-in other_profile"
+                               href="{% url 'accounts:project_applying' id=project.id %}">Apply</a>
+                            <a class="btn btn-primary logged-in other_profile"
+                               href="{% url 'accounts:removefromparticipate' id=project.id %}">Delete1</a>
                         </div>
                     {% endif %}
                 </div>
@@ -146,22 +151,16 @@
                     <div class="col-sm-4">
                         <div class="card">
                             <div class="row no-gutters">
-                                <div class="col-md-4">
-                                    <img {% if comment.user_profile.image %}
-                                        src="{{ comment.user_profile.image.url }}" {% else %}
-                                        src="/media/default.png" {% endif %}
-                                        class="rounded img-fluid" alt="No photo">
-                                </div>
-                                <div class="col-md-8">
-                                    <div class="card-body" align="right">
-                                        <div class="description">
-                                            <h6><a href="{% url 'accounts:profile_with_id' id=comment.author.id %}"
-                                                   class="stretched-link font-weight-bold">{{ comment.author.first_name }} {{ comment.author.last_name }}</a>
-                                            </h6>
-                                            <p>{{ comment.text }}</p>
-                                        </div>
+
+                                <div class="card-body">
+                                    <div class="description">
+                                        <h6><a href="{% url 'accounts:profile_with_id' id=comment.author.id %}"
+                                               class="stretched-link font-weight-bold">{{ comment.author.first_name }} {{ comment.author.last_name }}</a>
+                                        </h6>
+                                        <p>{{ comment.text }}</p>
                                     </div>
                                 </div>
+
                             </div>
                         </div>
                     </div>
@@ -179,7 +178,7 @@
 </div>
 
 <!-- Modal -->
-{% if current_user != project.owner  %}
+{% if current_user != project.owner %}
     <div class="modal fade" id="commentModal" tabindex="-1" role="dialog" aria-labelledby="commentModalLabel"
          aria-hidden="true">
         <div class="modal-dialog" role="document">

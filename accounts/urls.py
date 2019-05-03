@@ -32,8 +32,7 @@ urlpatterns = [
     url(r'^project/(?P<id>\d+)/edit$', views.edit_project, name='project_edit'),
     url(r'^project/(?P<id>\d+)/delete', views.delete_project, name='project_delete'),
     url(r'^project/(?P<id>\d+)/applytoproject', views.applying_to_project, name='project_applying'),
-    url(r'^project/(?P<id>\d+)/removefromlist', views.deletefromwaitinglist, name='removefromparticipate'),
-  #  url(r'^project/(?P<id>\d+)/destroy', views.destroy, name='destroy'),
+    url(r'^project/(?P<id>\d+)/removefromlist', views.delete_from_waitinglist, name='removefromparticipate'),
 
     url(r'^search/?$', views.search, name='search'),
 ]

@@ -3,10 +3,10 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import PasswordChangeForm
 from django.contrib.auth.models import User
 from django.http import HttpResponseRedirect
-from django.shortcuts import render, redirect, get_object_or_404
+from django.shortcuts import render, redirect, get_object_or_404, get_list_or_404
 
 from accounts.forms import RegistrationForm, EditProfileForm, ProfileUpdateForm, ProjectCreateForm, EditProjectForm, \
-    AddCommentForm, AddToProjectForm
+    AddCommentForm
 from accounts.models import ProjectPage, UserProfile, Comment
 
 
@@ -226,10 +226,12 @@ def search(request):
 def applying_to_project(request, id=None):
     project = get_object_or_404(ProjectPage, id=id)
     project.waiting_list.add(request.user.id)
+    project.save()
     return redirect('accounts:project', id=id)
 
 
-def deletefromwaitinglist(request, id=None):
+def delete_from_waitinglist(request, id=None):
     project = get_object_or_404(ProjectPage, id=id)
     project.waiting_list.remove(request.user.id)
+    project.save()
     return redirect('accounts:project', id=id)
