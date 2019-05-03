@@ -229,6 +229,7 @@ def search(request):
         q = request.GET['q']
         filter = ProjectPage.objects.filter(Q(description__contains=q) | Q(type__contains=q))
         args = {'filter': filter, 'query': q}
+        print(len(filter))
         return render(request, 'projects/results.html', args)
     else:
         return HttpResponse('Please submit a search term.')

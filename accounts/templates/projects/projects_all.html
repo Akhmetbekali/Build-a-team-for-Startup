@@ -31,6 +31,14 @@
             </button>
         </div>
         <div class="collapse navbar-collapse" id="navbarNav">
+            <form class="form-inline ml-auto" action="{% url 'accounts:search' %}" method="get">
+                <div class="form-group no-border">
+                    <input type="text" class="form-control" placeholder="Search" name="q">
+                </div>
+                <button type="submit" class="btn btn-white btn-just-icon btn-round">
+                    <i class="material-icons">search</i>
+                </button>
+            </form>
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item">
                     <a class="nav-link" href="{% url 'accounts:profiles_catalog' %}">Worker Catalog</a>
@@ -100,7 +108,7 @@
             {% endfor %}
         </div>
         {% if user.is_authenticated %}
-        <hr class="disappear">
+            <hr class="disappear">
         {% endif %}
         <div class="row">
             {% for project in projects %}
