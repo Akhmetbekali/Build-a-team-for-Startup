@@ -112,7 +112,7 @@
                         {% if current_user in project.waiting_list.all %}
                             <a class="btn btn-primary"
                                href="{% url 'accounts:removefromparticipate' id=project.id %}">Exit from project</a>
-                        {% else %}
+                        {% elif current_user not in project.participants.all %}
                             <a class="btn btn-primary"
                                href="{% url 'accounts:project_applying' id=project.id %}">Apply</a>
                         {% endif %}
