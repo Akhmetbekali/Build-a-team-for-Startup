@@ -223,12 +223,10 @@ def search(request):
 def applying_to_project(request, id=None):
     project = get_object_or_404(ProjectPage, id=id)
     project.waiting_list.add(request.user.id)
-    args = {'project': project, 'current_user': request.user}
-    return render(request, 'projects/project.html', args)
+    return redirect('accounts:project', id=id)
 
 
 def deletefromwaitinglist(request, id=None):
     project = get_object_or_404(ProjectPage, id=id)
     project.waiting_list.remove(request.user.id)
-    args = {'project': project, 'current_user': request.user}
-    return render(request, 'projects/project.html', args)
+    return redirect('accounts:project', id=id)
