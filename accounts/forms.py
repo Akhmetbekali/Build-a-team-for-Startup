@@ -61,6 +61,13 @@ class SectionExtractionForm(forms.ModelForm):
         fields = '__all__'
 
 
+class AddToProjectForm(forms.ModelForm):
+    class Meta:
+        model = ProjectPage
+        fields = (
+            'title',
+        )
+
 class ProjectCreateForm(forms.ModelForm):
     class Meta:
         model = ProjectPage

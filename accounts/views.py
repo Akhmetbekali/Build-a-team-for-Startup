@@ -6,7 +6,7 @@ from django.http import HttpResponseRedirect
 from django.shortcuts import render, redirect, get_object_or_404
 
 from accounts.forms import RegistrationForm, EditProfileForm, ProfileUpdateForm, ProjectCreateForm, EditProjectForm, \
-    AddCommentForm
+    AddCommentForm, AddToProjectForm
 from accounts.models import ProjectPage, UserProfile, Comment
 
 
@@ -125,6 +125,9 @@ def project_page(request, id):
         'comments': comments
     }
     if request.method == 'POST':
+        answer = request.POST.get('dropdown', False)
+        project.waiting_list.remove(answer)
+        project.participants.add(answer)
         commentForm = AddCommentForm(request.POST, author=request.user, project=project)
         if commentForm.is_valid():
             commentForm.save()
@@ -219,6 +222,13 @@ def search(request):
 @login_required(login_url="/account/login")
 def applying_to_project(request, id):
     project = get_object_or_404(ProjectPage, id=id)
-    project.waiting_list.add(request.user)
-    project.save()
-    return redirect('accounts:project', id=id)
+    project.waiting_list.add(request.user.id)
+    args = {'project': project, 'current_user': request.user}
+    return render(request, 'projects/project.html', args)
+
+
+def deletefromparticipate(request, id=None):
+    project = get_object_or_404(ProjectPage, id=id)
+    project.waiting_list.remove(request.user.id)
+    args = {'project': project, 'current_user': request.user}
+    return render(request, 'projects/project.html', args)
