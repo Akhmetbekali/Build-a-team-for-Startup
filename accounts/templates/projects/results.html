@@ -33,7 +33,7 @@
         <div class="collapse navbar-collapse" id="navbarNav">
             <form class="form-inline ml-auto" action="{% url 'accounts:search' %}" method="get">
                 <div class="form-group no-border">
-                    <input type="text" class="form-control" placeholder="Search" name="q">
+                    <input type="text" class="form-control" style="color: white" placeholder="Search" name="q">
                 </div>
                 <button type="submit" class="btn btn-white btn-just-icon btn-round">
                     <i class="material-icons">search</i>
@@ -74,74 +74,35 @@
 <div class="main main-raised">
     <div class="container" style="max-width: 100%">
         <div class="row">
-            {% for project in projects %}
-                {% if project.owner == user %}
-                    <div class="col-sm-4">
-                        <div class="card"
-                             style="padding-left: 5px; padding-bottom: 5px; padding-top: 5px">
+            {% for project in filter %}
+                <div class="col-sm-4">
+                    <div class="card"
+                         style="padding-left: 5px; padding-bottom: 5px; padding-top: 5px">
 
-                            <div class="row no-gutters">
-                                <div class="col-md-4">
-                                    <img class="img-raised rounded-circle img-fluid"
-                                            {% if project.image %} src="{{ project.image.url }}" {% else %}
-                                         src="/media/default_project.jpg" {% endif %} alt="My Photo">
-                                </div>
-                                <div class="col-md-8">
-                                    <div class="card-body" align="right">
-                                        <div class="description">
-                                            <h6>Title: {{ project.title }}</h6>
-                                            <p>Type: {{ project.type }}</p>
-                                            <p>Owner: {{ project.owner }}</p>
-                                            <div class="rating">
+                        <div class="row no-gutters">
+                            <div class="col-md-4">
+                                <img class="img-raised rounded-circle img-fluid"
+                                        {% if project.image %} src="{{ project.image.url }}" {% else %}
+                                     src="/media/default_project.jpg" {% endif %} alt="My Photo">
+                            </div>
+                            <div class="col-md-8">
+                                <div class="card-body" align="right">
+                                    <div class="description">
+                                        <h6>Title: {{ project.title }}</h6>
+                                        <p>Type: {{ project.type }}</p>
+                                        <p>Owner: {{ project.owner }}</p>
+                                        <div class="rating">
 
-                                            </div>
-                                            <a class="btn btn-primary"
-                                               href="{% url 'accounts:project' id=project.id %}">View
-                                                Project</a>
                                         </div>
+                                        <a class="btn btn-primary"
+                                           href="{% url 'accounts:project' id=project.id %}">View
+                                            Project</a>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                {% endif %}
-            {% endfor %}
-        </div>
-        {% if user.is_authenticated %}
-            <hr class="disappear">
-        {% endif %}
-        <div class="row">
-            {% for project in projects %}
-                {% if project.owner != user %}
-                    <div class="col-sm-4">
-                        <div class="card"
-                             style="padding-left: 5px; padding-bottom: 5px; padding-top: 5px">
-
-                            <div class="row no-gutters">
-                                <div class="col-md-4">
-                                    <img class="img-raised rounded-circle img-fluid"
-                                            {% if project.image %} src="{{ project.image.url }}" {% else %}
-                                         src="/media/default_project.jpg" {% endif %} alt="My Photo">
-                                </div>
-                                <div class="col-md-8">
-                                    <div class="card-body" align="right">
-                                        <div class="description">
-                                            <h6>Title: {{ project.title }}</h6>
-                                            <p>Type: {{ project.type }}</p>
-                                            <p>Owner: {{ project.owner }}</p>
-                                            <div class="rating">
-
-                                            </div>
-                                            <a class="btn btn-primary"
-                                               href="{% url 'accounts:project' id=project.id %}">View
-                                                Project</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                {% endif %}
+                </div>
             {% endfor %}
 
         </div>
