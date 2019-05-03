@@ -3,7 +3,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import PasswordChangeForm
 from django.contrib.auth.models import User
 from django.http import HttpResponseRedirect
-from django.shortcuts import render, redirect, get_object_or_404
+from django.shortcuts import render, redirect, get_object_or_404, get_list_or_404
 
 from accounts.forms import RegistrationForm, EditProfileForm, ProfileUpdateForm, ProjectCreateForm, EditProjectForm, \
     AddCommentForm
@@ -125,6 +125,19 @@ def project_page(request, id):
         'comments': comments
     }
     if request.method == 'POST':
+        waitingList = request.POST.get('waitingList', False)
+        if waitingList:
+            project.waiting_list.remove(waitingList)
+            project.participants.add(waitingList)
+            project.save()
+            return redirect('accounts:project', id=id)
+
+        participantList = request.POST.get('participantList', False)
+        if participantList:
+            project.participants.remove(participantList)
+            project.save()
+            return redirect('accounts:project', id=id)
+
         commentForm = AddCommentForm(request.POST, author=request.user, project=project)
         if commentForm.is_valid():
             commentForm.save()
@@ -214,3 +227,17 @@ def search(request):
         'type': type,
         'keyword': description
     })
+
+
+def applying_to_project(request, id=None):
+    project = get_object_or_404(ProjectPage, id=id)
+    project.waiting_list.add(request.user.id)
+    project.save()
+    return redirect('accounts:project', id=id)
+
+
+def delete_from_waitinglist(request, id=None):
+    project = get_object_or_404(ProjectPage, id=id)
+    project.waiting_list.remove(request.user.id)
+    project.save()
+    return redirect('accounts:project', id=id)

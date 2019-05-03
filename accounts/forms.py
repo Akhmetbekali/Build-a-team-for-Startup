@@ -52,6 +52,22 @@ class ProfileUpdateForm(forms.ModelForm):
         )
 
 
+class SectionExtractionForm(forms.ModelForm):
+    users = forms.ModelMultipleChoiceField(widget=forms.CheckboxSelectMultiple(attrs={'user': 'user'}),
+                                           queryset=User.objects.all())
+
+    class Meta:
+        model = ProjectPage
+        fields = '__all__'
+
+
+class AddToProjectForm(forms.ModelForm):
+    class Meta:
+        model = ProjectPage
+        fields = (
+            'title',
+        )
+
 class ProjectCreateForm(forms.ModelForm):
     class Meta:
         model = ProjectPage

@@ -29,14 +29,13 @@ post_save.connect(create_profile, sender=User)
 
 
 class ProjectPage(models.Model):
-    owner = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
+    owner = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, related_name='creater')
     image = models.ImageField(default='default_project.jpg', upload_to='project_pics')
-
     type = models.CharField(max_length=20, default='project')
     title = models.CharField(max_length=30, default='New Project')
     description = models.CharField(max_length=500, default='')
-    #involved = models.CommaSeparatedIntegerField(max_length=200)
-    #participate = models.CommaSeparatedIntegerField(max_length=200)
+    waiting_list = models.ManyToManyField(User, blank=True, related_name="users")
+    participants = models.ManyToManyField(User, blank=True, related_name="participate")
 
 
 class Comment(models.Model):
