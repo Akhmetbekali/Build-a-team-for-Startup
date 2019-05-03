@@ -97,29 +97,26 @@
                     </div>
                 </div>
                 <div class="col-2">
+                    <button type="button" class="btn btn-primary" data-toggle="modal"
+                            data-target="#participantModal">Participant
+                    </button>
                     {% if current_user == project.owner %}
-                        <div class="my_project">
-                            <a class="btn btn-primary" href="{% url 'accounts:project_edit' id=project.id %}">Edit
-                                Project</a>
-                            <button type="button" class="btn btn-primary" data-toggle="modal"
-                                    data-target="#waitingListModal">Waiting
-                                List
-                            </button>
-                            <button type="button" class="btn btn-primary" data-toggle="modal"
-                                    data-target="#participantModal">Participant
-                            </button>
-                        </div>
+                        <a class="btn btn-primary" href="{% url 'accounts:project_edit' id=project.id %}">Edit
+                            Project</a>
+                        <button type="button" class="btn btn-primary" data-toggle="modal"
+                                data-target="#waitingListModal">Waiting
+                            List
+                        </button>
                     {% else %}
-                        <div class="other_project">
-                            <a class="btn btn-primary" href="#">Subscribe</a>
-                            {% if current_user in project.waiting_list.all %}
-                                <a class="btn btn-primary"
-                                   href="{% url 'accounts:removefromparticipate' id=project.id %}">Exit from project</a>
-                            {% else %}
-                                <a class="btn btn-primary"
-                                   href="{% url 'accounts:project_applying' id=project.id %}">Apply</a>
-                            {% endif %}
-                        </div>
+                        <a class="btn btn-primary" href="#">Subscribe</a>
+                        {% if current_user in project.waiting_list.all %}
+                            <a class="btn btn-primary"
+                               href="{% url 'accounts:removefromparticipate' id=project.id %}">Exit from project</a>
+                        {% else %}
+                            <a class="btn btn-primary"
+                               href="{% url 'accounts:project_applying' id=project.id %}">Apply</a>
+                        {% endif %}
+
                     {% endif %}
                 </div>
 
@@ -149,7 +146,7 @@
                 {% endfor %}
             </div>
             <div class="row" style="padding-bottom: 2%">
-                {% if current_user != project.owner %}
+                {% if current_user != project.owner and current_user.is_authenticated %}
                     <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#commentModal">Write
                         comment
                     </button>
@@ -231,46 +228,46 @@
 {% endif %}
 
 <!-- Modal Participant List-->
-{% if current_user == project.owner %}
-    <div class="modal fade" id="participantModal" tabindex="-1" role="dialog" aria-labelledby="participantModalLabel"
-         aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <form class="form-group" method="post" enctype="multipart/form-data">
-                    {% csrf_token %}
-                    <div class="modal-header">
-                        <h5 class="modal-title">Participant List</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <div class="modal-body">
-                        {% if project.participants.all %}
-                            <label class="bmd-label-static">Multiple select list</label>
-                            <br>
-                        {% else %}
-                            <label class="bmd-label-static">No one =(</label>
-                        {% endif %}
-                        <label for="participantList">
-                            <select multiple class="form-control" name="participantList" id="participantList">
-                                {% for user in project.participants.all %}
-                                    <option value="{{ user.id }}">{{ user.first_name }}</option>
-                                {% endfor %}
-                            </select>
-                        </label>
+<div class="modal fade" id="participantModal" tabindex="-1" role="dialog" aria-labelledby="participantModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <form class="form-group" method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                <div class="modal-header">
+                    <h5 class="modal-title">Participant List</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    {% if project.participants.all %}
+                        <label class="bmd-label-static">Multiple select list</label>
+                        <br>
+                    {% else %}
+                        <label class="bmd-label-static">No one =(</label>
+                    {% endif %}
+                    <label for="participantList">
+                        <select multiple class="form-control" name="participantList" id="participantList">
+                            {% for user in project.participants.all %}
+                                <option value="{{ user.id }}">{{ user.first_name }}</option>
+                            {% endfor %}
+                        </select>
+                    </label>
 
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                    {% if current_user == project.owner %}
                         <button type="submit" class="btn btn-primary">Delete From
                             Project
                         </button>
-                    </div>
-                </form>
-            </div>
+                    {% endif %}
+                </div>
+            </form>
         </div>
     </div>
-{% endif %}
+</div>
 
 
 <footer class="footer footer-default">

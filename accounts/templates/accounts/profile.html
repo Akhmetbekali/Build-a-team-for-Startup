@@ -137,7 +137,7 @@
                 {% endfor %}
             </div>
             <div class="row" style="padding-bottom: 2%">
-                {% if current_user != user %}
+                {% if current_user != user and current_user.is_authenticated%}
                     <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#commentModal">Write
                         comment
                     </button>
