@@ -125,13 +125,19 @@ def project_page(request, id):
         'comments': comments
     }
     if request.method == 'POST':
-        answer = request.POST.get('dropdown', False)
-        answer2 = request.POST.get('dropdown2', False)
-        if answer:
-            project.waiting_list.remove(answer)
-            project.participants.add(answer)
-        if answer2:
-            project.participants.remove(answer2)
+        waitingList = request.POST.get('waitingList', False)
+        if waitingList:
+            project.waiting_list.remove(waitingList)
+            project.participants.add(waitingList)
+            project.save()
+            return redirect('accounts:project', id=id)
+
+        participantList = request.POST.get('participantList', False)
+        if participantList:
+            project.participants.remove(participantList)
+            project.save()
+            return redirect('accounts:project', id=id)
+
         commentForm = AddCommentForm(request.POST, author=request.user, project=project)
         if commentForm.is_valid():
             commentForm.save()
