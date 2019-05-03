@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<p>You searched for: <strong>{{ query }}</strong></p>
+
+{% for project in filter %}
+    <h6>Title: {{ project.title }}</h6>
+    <p>Type: {{ project.type }}</p>
+    <p>Description: {{ project.description }}</p>
+
+{% endfor %}
+</body>
+</html>

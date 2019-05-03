@@ -2,12 +2,16 @@ from django.contrib.auth import update_session_auth_hash
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import PasswordChangeForm
 from django.contrib.auth.models import User
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, HttpResponse
 from django.shortcuts import render, redirect, get_object_or_404
+from django.db.models import Q
+
 
 from accounts.forms import RegistrationForm, EditProfileForm, ProfileUpdateForm, ProjectCreateForm, EditProjectForm, \
     AddCommentForm
 from accounts.models import ProjectPage, UserProfile, Comment
+
+import cgi
 
 
 def home(request):
@@ -202,15 +206,15 @@ def delete_project(request, id):
     return HttpResponseRedirect('/account/projects_catalog/')
 
 
-def search(request):
-    # Search by type of the project
-    # Instead of 'lab' we need to get users input
-    type = ProjectPage.objects.filter(type__contains='lab')
+def search_form(request):
+    return render(request, 'projects/test.html')
 
-    # Search by keyword in description
-    # Instead of '12' we need to get users input
-    description = ProjectPage.objects.filter(description__contains='12')
-    return render(request, 'projects/test.html', {
-        'type': type,
-        'keyword': description
-    })
+
+def search(request):
+    if 'q' in request.GET and request.GET['q']:
+        q = request.GET['q']
+        filter = ProjectPage.objects.filter(Q(description__contains=q) | Q(type__contains=q))
+        args = {'filter': filter, 'query': q}
+        return render(request, 'projects/results.html', args)
+    else:
+        return HttpResponse('Please submit a search term.')

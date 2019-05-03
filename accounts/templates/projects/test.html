@@ -1,15 +1,11 @@
-<!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Search</title>
 </head>
 <body>
-{% for project in keyword %}
-    <h6>Title: {{ project.title }}</h6>
-    <p>Type: {{ project.type }}</p>
-    <p>Description: {{ project.description }}</p>
-
-{% endfor %}
+    <form action="../search" method="get">
+        <input type="text" name="q">
+        <input type="submit" value="Search">
+    </form>
 </body>
 </html>

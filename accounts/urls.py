@@ -32,5 +32,6 @@ urlpatterns = [
     url(r'^project/(?P<id>\d+)/edit$', views.edit_project, name='project_edit'),
     url(r'^project/(?P<id>\d+)/delete', views.delete_project, name='project_delete'),
 
-    url(r'^search/?$', views.search, name='search'),
+    url(r'^search-form/$', views.search_form),
+    url(r'^search/$', views.search),
 ]
